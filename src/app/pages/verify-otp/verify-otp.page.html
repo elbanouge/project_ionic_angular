@@ -1,0 +1,59 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title style="text-align: center;color:black;">Vérifier OTP</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" style="height: 97%;overflow: scroll;">
+  <ion-grid>
+
+    <ion-row style="height:18%;max-height: 18%;">
+      <ion-col>
+        <img src='../../../assets/images/receiveEmail_6.jpg'/>
+      </ion-col>
+    </ion-row>
+
+    <ion-row  style="height:18%;max-height: 18%;">
+      <ion-col >
+        <h2>Vérification de l'OTP</h2>
+        <p>Entrez l'OTP envoyé à votre email</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height:18%;max-height: 18%;">
+      <ion-col id="inputColumn">
+          <input type="tel" name="first" id="first"  (keyup)="keytab($event,$event)" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+          <input type="tel" name="second" id="second" (keyup)="keytab($event,$event)" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+          <input type="tel" name="third" id="third"  (keyup)="keytab($event,$event)" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+          <input type="tel" name="fourth" id="fourth"  (keyup)="keytab($event,$event)" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+          <input type="tel" name="fifth" id="fifth"  (keyup)="keytab($event,$event)" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+          <input type="tel" name="sixth" id="sixth" style="margin-right: 0px;" (keyup)="keytab($event,$event)" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height:18%;max-height: 18%;">
+      <ion-col>
+        <ion-chip id="chip"  outline="true" style="width: 97%;display: none;" >
+          <ion-icon name="warning" color="secondary" ></ion-icon>
+          <ion-label style="text-align: center;">{{errorMessage}}</ion-label>
+          <ion-icon name="close" color="secondary" (click)="closeChip()" style="float: right;"></ion-icon>
+        </ion-chip>
+        <p>n’a pas reçu l’OTP ? <a (click)="sendOtpAgain()" id="resend">Renvoyer l'OTP</a>
+           <span id="otpSent"></span></p>
+      </ion-col>
+    </ion-row>
+
+   
+    <ion-row style="position: fixed; bottom: 25px;width:90%;" id="fixed_row">
+        <ion-toolbar color="primary">
+          <ion-button color="secondary"  expand="block"  id="verify" shape="round" (click)="verifyOTP($event)">
+            <ion-label >Vérifier</ion-label>
+            <!-- <ion-icon name="reload-circle-outline" style="width:20px"></ion-icon> -->
+          </ion-button>
+      </ion-toolbar>
+    </ion-row>
+  
+    </ion-grid>
+  </ion-card>
+</ion-content>

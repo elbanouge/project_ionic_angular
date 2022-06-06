@@ -1,0 +1,73 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/login" style="color:#00273E">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="header" >
+    <h1 >Create Your <br/>Account </h1>
+  </div>
+  <form id="form" (ngSubmit)="signup()">
+    <ion-item class=" w3-round-large">
+      <ion-input [(ngModel)]="userModel.firstName"  class="w3-input "
+      placeholder="firstname" type="text" name="firstName" required
+      #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" required></ion-input>
+    </ion-item>
+   
+    <div class="alert w3-margin-bottom" *ngIf="firstName.errors">
+      <small class="text-danger w3-text-red " *ngIf="firstName.errors.required">First name is required.</small>
+    </div>
+    <div style="margin-bottom: 17px;"></div>
+    <ion-item class=" w3-round-large">
+      <ion-input [(ngModel)]="userModel.lastName"  class="w3-input "
+      placeholder="lastname" type="text" name="lastName" required
+      #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" required></ion-input>
+    </ion-item>
+    
+    <div class="alert w3-margin-bottom" *ngIf="lastName.errors ">
+      <small class="text-danger w3-text-red " *ngIf="lastName.errors.required">Last name is required.</small>
+    </div>
+    <div style="margin-bottom: 17px;"></div>
+    <ion-item class=" w3-round-large">
+      <ion-input  [(ngModel)]="userModel.email"  class="w3-input "
+      pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+      placeholder="Email" type="text" name="email" required
+      #email="ngModel" [class.is-invalid]="email.invalid && email.touched" required
+      autofocus="off"></ion-input>
+    </ion-item>
+    <div class="alert w3-margin-bottom" *ngIf="errorMessage">
+      <!-- <small class="text-danger w3-text-red  " *ngIf="pwd1.errors.required">Mot de Passe est nécessaire.</small> -->
+      <small class="text-danger w3-text-red  " *ngIf="errorMessageMail">{{errorMessageMail}}</small>
+    </div>
+    <div class="alert w3-margin-bottom" *ngIf="email.errors && (email.invalid || email.touched)">
+      <small class="text-danger w3-text-red " *ngIf="email.errors.required">Email is required.</small>
+      <small class="text-danger w3-text-red " *ngIf="email.errors.pattern">Please provide a valid email address.</small>
+    </div>
+    <div style="margin-bottom: 17px;"></div>
+    <ion-item class="w3-round-large w3-margin-bottom">
+      <ion-input [(ngModel)]="userModel.password"  class="w3-input" expand="block"  placeholder="Password" 
+      type="password" name="password" required  minlength="8" #password [class.is-invalid]="password.errors"></ion-input>
+    </ion-item>
+    
+    <ion-item class="w3-round-large w3-margin-bottom">  
+      <ion-input  #passwordConfirm  [(ngModel)]="pwd1" type="password" placeholder="Confirm Password"   name="passwordConfirm" (focusout)="blurEvent()"></ion-input>
+    </ion-item>
+    <div class="alert w3-margin-bottom" *ngIf="errorMessage">
+      <!-- <small class="text-danger w3-text-red  " *ngIf="pwd1.errors.required">Mot de Passe est nécessaire.</small> -->
+      <small class="text-danger w3-text-red  " *ngIf="errorMessage">{{errorMessage}}</small>
+    </div>
+    <ion-checkbox  class="marginTop" id="checkbox" style="border-style: none;" [(ngModel)]="passwordCheckbox" name="cc" (click)="showPassword(password,passwordConfirm)"></ion-checkbox>
+    <ion-label> show Passwords</ion-label>
+    
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit"  expand="block" color="primary" shape="round">Sign Up</ion-button><br>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-content>

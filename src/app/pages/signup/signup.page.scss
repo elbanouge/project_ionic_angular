@@ -1,0 +1,51 @@
+ion-toolbar{
+    --background:#9de2f2;
+    ion-button{
+        color: #02699c;
+        text-transform: initial;
+        font-size: 17px;
+        font-family: RobotoMedium;
+        font-weight: bolder;
+    }
+}
+ion-content{
+    --background: linear-gradient(to bottom left, #9de2f2 0%, #00273e 100%) !important;
+        h1{
+            text-align: center;
+            font-family: BeautifulPeoplePersonalUse !important;
+            top: 41px;
+            position: relative;
+            font-weight: 700;
+            font-size: 60px;
+            color: #010100;
+            margin-bottom: 20%;
+        }
+    #form{
+        margin-top: 15%;
+        padding-left: 30px;
+        padding-right: 30px;
+        --background: linear-gradient(to bottom left, #00273e 0%, #9de2f2 100%);
+        ::placeholder,:-ms-input-placeholder{
+            font-family: RobotoMedium;
+            font-weight: bolder;
+        }
+        ion-button{
+            color: #9de2f2;
+            margin-top: 35px;
+            height: 48px;
+            font-size: 18px;
+            text-transform: initial;
+            box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
+            --box-shadow:none;
+            font-family: RobotoMedium;
+            font-weight: bolder;
+        }
+    }
+
+    p{
+        text-align: center;
+        font-family: RobotoMedium;
+        font-weight: bolder;
+        color: #00273e;
+    }
+}

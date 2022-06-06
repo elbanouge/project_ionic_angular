@@ -1,0 +1,23 @@
+
+ion-title {
+    color: black ;
+    text-align: center;
+}
+
+ion-title ion-icon {
+    // position:relative;
+    // left: 48%;
+    font-size: 130%;
+}
+
+ion-button ion-icon {
+    font-size: 200%;
+}
+
+.list-accordion > ion-item{
+    border-bottom-color: gray;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    margin-left: 10px;
+}
+

@@ -1,0 +1,99 @@
+#edit,#save{
+    font-size: 170%;
+    float: right;
+}
+
+ion-card{
+    height: 96%;
+    border-radius: 20px;
+    box-shadow: 2px 1px 5px 2px #c4c0d5;
+}
+
+ion-button ion-icon {
+    font-size: 200%;
+}
+
+ion-input{
+    --color: aquamarine;
+}
+.sexe{
+    --background: gray;
+}
+
+.sexe:hover{
+    --background: #321c95;
+}
+
+ion-modal.stack-modal {
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.32);
+}
+
+ion-row:nth-child(2){
+    height: 370px;
+    position: fixed;
+    top: 32%;
+}
+ion-row:nth-child(3){
+    height: 200px;
+    position: fixed;
+    top: 40%;
+}
+
+ion-col ion-button{
+    --background:rgb(146, 157, 168);
+}
+
+ion-list {
+    height:  320px;
+    overflow: scroll;
+    position: relative;
+    background-color: whitesmoke;
+    ion-item {
+      .item-inner {
+        overflow: visible !important;
+        .input-wrapper {
+          overflow: visible !important;
+          ion-label {
+            overflow: visible !important;
+          }
+        }
+      }
+    }
+  }
+
+@media only screen and (max-height: 680px) {
+    #secondRow{
+        top:35%;
+    }
+    ion-list{
+        height: 240px;
+    }
+}
+
+@media only screen and (max-height: 640px) {
+    #secondRow{
+        top:36%;
+    }
+    ion-list{
+        height: 220px;
+    }
+}
+
+@media only screen and (max-height: 610px) {
+    #secondRow{
+        top:37%;
+    }
+    ion-list{
+        height: 210px;
+    }
+}
+
+@media only screen and (max-height: 580px) {
+    #secondRow{
+        top:43%;
+    }
+    ion-list{
+        height: 135px;
+    }
+}

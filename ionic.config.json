@@ -1,0 +1,7 @@
+{
+  "name": "Request Credit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,74 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/welcome" color="secondary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/login" color="secondary">
+        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" style="height: 97%;overflow: scroll;" >
+  <ion-grid >
+    <!-- <h1>Simuler mon crédit</h1> -->
+    <ion-row style="height:12%;padding-bottom: 20px;">
+      <ion-col>
+        <h1>Simuler mon crédit</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row id="firstRow" style="height:20%;">
+      <ion-col>
+        <ion-label >Êtes-vous client ?</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button color="tertiary">Oui</ion-button>
+        <ion-button>Non</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row  style="height:20%;">
+      <ion-col>
+        <ion-label>Êtes-vous un fonctionnaire</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button color="tertiary">Oui</ion-button>
+        <ion-button>Non</ion-button>
+      </ion-col>
+    </ion-row  >
+    <ion-row style="height:20%;">
+      <ion-col>
+        <ion-label>Quel est votre revenu mensuel?</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button>Inférieur ou égale à 7000Dh</ion-button>
+        <ion-button>Inférieur ou égale à 7000Dh</ion-button>
+      <ion-button>Supérieur à 20 000Dh</ion-button>
+    </ion-col>
+    </ion-row>
+  <ion-row  style="position: fixed; bottom: 25px;width:90%;margin-bottom: 0%;" >
+      <ion-toolbar color="primary">
+        <ion-buttons slot="end">
+          <ion-button routerLink="/simulate-op" color="secondary">
+            <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-row>
+  </ion-grid>
+
+  </ion-card>
+</ion-content>
+<!-- <ion-footer   collapse="fade">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button routerLink="/simulate-op" color="secondary">
+        <ion-icon slot="icon-only" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer> -->

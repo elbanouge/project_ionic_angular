@@ -1,0 +1,104 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" *ngIf="new!='new' && new!='update'">
+      <ion-button routerLink="/welcome" color="secondary">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="color: black;text-align: center;">Simuler mon crédit</ion-title>
+    <ion-buttons slot="end" *ngIf="new!='new' && new!='update'">
+      <ion-button routerLink="/login" color="secondary">
+        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card color="primary" style="height: 97%;overflow: scroll;">
+  <ion-grid>
+    <ion-row style="height:12%;">
+      <ion-col>
+        <img src="../../../assets/images/loanCalcul.jpg">
+      </ion-col>
+    </ion-row>
+
+    <ion-row id="firstRow" style="height:12%;">
+      <ion-col>
+        <ion-label>Montant (DH)</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button disabled class="simulateOp"><span class="result">{{credit.capital}}</span><span class="unit"> DH</span></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height:12%;">
+      <ion-col>
+        <ion-item color="primary">
+          <ion-range min="5000" max="300000" color="secondary"  
+          mode="md" pin="true" step="1000" onchange="" [(ngModel)]="credit.capital"
+          (ngModelChange)="CapitalNgModelChange($event)" 
+           id="capital">
+            <ion-label slot="start">5 000</ion-label>
+            <ion-label slot="end">3 00000</ion-label>
+          </ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height:12%;">
+      <ion-col>
+        <ion-label>Durée (mois)</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button disabled class="simulateOp"><span class="result">{{credit.duree}} </span><span class="unit"> mois</span></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height:12%;">
+      <ion-col>
+        <ion-item color="primary">
+          <ion-range min="12" max="84" color="secondary" mode="md" pin="true" step="1"
+          [(ngModel)]="credit.duree" id="duree" 
+          (ngModelChange)="DureeNgModelChange($event)">
+            <ion-label slot="start">12</ion-label>
+            <ion-label slot="end">84</ion-label>
+          </ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="height:12%;" >
+      <ion-col>
+        <ion-label>Mensualité (DH)</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-button disabled class="simulateOp"><span class="result">{{credit.mensualite}}</span><span class="unit"> DH</span></ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row style="height:12%;">
+      <ion-col >
+        <ion-item color="primary">
+          <ion-range  mode="md" pin="true"  id="mensualite" 
+          color="secondary" [(ngModel)]="credit.mensualite" 
+          (ngModelChange)="MensualiteNgModelChange($event)" >
+          </ion-range>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="position: fixed; bottom: 25px;width:90%;" id="fixed_row">
+      <ion-toolbar color="primary" >
+      <ion-buttons slot="end">
+        <ion-button  color="primary" (click)="onSubmitResult()" >
+          <ion-icon slot="icon-only" name="arrow-forward" color="secondary"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-row>
+
+    </ion-grid>
+
+    
+
+  </ion-card>
+</ion-content>

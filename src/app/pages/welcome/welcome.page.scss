@@ -1,0 +1,61 @@
+ion-content{
+    // --background:white;
+    --background :none;
+    background-image :url("../../../assets/images/img5.jpg");
+    background-size: cover;
+        h2{
+            font-weight: 700;
+            font-size: 50px;
+            color: #253c90;
+            font-family: 'BeautifulPeoplePersonalUse' !important;
+            // --ion-font-family:  'BeautifulPeoplePersonalUse'!important;
+            transform: rotateZ(2deg);
+        }
+        p{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size: large;
+            color: slategray;
+        }
+        ion-button{
+            margin-top: 35px;
+            height: 48px;
+            font-size: 18px;
+            text-transform: initial;
+            border-radius: 50px;
+            box-shadow: 1px 8px 8px 0px rgba(9, 10, 12, 0.05);
+            --box-shadow:none;
+            // font-family: RobotoMedium;
+            font-weight: bolder;
+            border: solid #855fa0;
+        }
+}    
+ion-footer{
+    ion-button{
+        margin-top: 35px;
+        height: 48px;
+        font-size: 18px;
+        text-transform: initial;
+        border-radius: 50px;
+        box-shadow: 1px 8px 8px 0px rgba(9, 10, 12, 0.05);
+        --box-shadow:none;
+        // font-family: RobotoMedium;
+        font-weight: bolder;
+        border: solid cadetblue;
+    }
+    ion-toolbar{
+        padding-bottom: 20px;
+    }
+}
+@keyframes move {
+    0%   {left:0px; top:0px;}
+    25%  { left:5px; top:0px;}
+    50%  { left:5px; top:0px;}
+    75%  { left:5px; top:0px;}
+    100% { left:0px; top:0px;}
+  }
+#arrow{
+    position: relative;
+    animation-name: move;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}

@@ -1,0 +1,128 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "~../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+//@import "~font-awesome/css/font-awesome.css";
+// @import "~w3/w3.css";
+// @import '~swiper/swiper';
+// @import '~@ionic/angular/css/ionic-swiper';
+@font-face {
+  font-family: 'BeautifulPeoplePersonalUse';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/BeautifulPeoplePersonalUse-dE0g.ttf');
+}
+
+@font-face {
+  font-family: 'RobotoMedium';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Roboto-Medium.ttf');
+}
+
+ion-accordion-group {
+  ion-accordion {
+    .ion-accordion-toggle-icon {
+      color: black;
+    }
+  }
+}
+
+.native-input[disabled].sc-ion-input-md {
+  opacity: 1 !important;
+}
+
+.simulateOp {
+  opacity: 1;
+}
+
+ion-header ion-toolbar {
+  --background: white;
+}
+
+ion-content {
+  --background: white;
+}
+
+.picker-opt.picker-opt-selected {
+  color: #855fa0;
+  --color: #855fa0;
+}
+
+ion-card {
+  background-color: white;
+  margin-bottom: 0px;
+
+  ion-item {
+    --background: white;
+  }
+}
+
+.aas {
+  --color: #855fa0;
+  font-weight: bold;
+  font-size: 16px;
+  //border-radius: 100px;
+  --background: #f5f5f5;
+
+  //--border-top-radius: 10px;
+  .cssClass {
+
+    font-weight: bold;
+    font-size: 16px;
+
+    ion-icon {
+      --color: #855fa0;
+    }
+  }
+}
+
+ion-alert button.alert-button.ion-focusable.ion-activatable.sc-ion-alert-md {
+  color: black;
+}
+
+[aria-checked=true].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+  border-color: grey;
+  border-width: 10px;
+}
+
+ion-picker .picker-button.ion-activatable.sc-ion-picker-md {
+  color: black;
+}
+
+@media screen and (max-height: 730px) {
+  #fixed_row {
+    position: relative !important;
+    bottom: auto !important;
+  }
+}
+
+.confirmAlert .alert-wrapper {
+  .alert-button-group {
+    justify-content: center;
+  }
+}

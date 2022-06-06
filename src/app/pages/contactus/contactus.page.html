@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar >
+    <ion-title style="color: black;text-align: center;">Contactez-nous</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" color="secondary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  
+  <ion-card  color="primary" style="height: 95%;background-color:white;">
+  <ion-grid style="height: 90%;">
+    <form id="contactForm" style="margin-top:30px ;"  (ngSubmit) = "onSubmit(email,name,message)" autocomplete="off">
+      <ion-row>
+        <ion-col>
+          <ion-label>Nom Complet</ion-label>
+          <!-- <br> -->
+          <ion-item  style="--background:white;">
+            
+            <ion-input (ionChange)="ValiderName(name)" #name type="text" name="name" placeholder="Nom et Prenom"></ion-input>
+            <span id="namecheck"></span>
+          </ion-item >
+          
+        </ion-col>
+      </ion-row>
+      <ion-row style="margin-top: 6%;">
+        <ion-col>
+          <ion-label>Email</ion-label>
+        <!-- <br> -->
+          <ion-item style="--background:white;">
+            
+            <ion-input (ionChange)="ValiderEmail(email)" #email name="email" type="email" placeholder="Votre e-mail"></ion-input>
+            <span id="emailcheck"></span>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-top: 6%;">
+        <ion-col>
+          <ion-label>Message</ion-label>
+        <!-- <br> -->
+          <ion-item style="--background:white;">
+            
+            <ion-textarea (ionChange)="ValiderMessage(message)" #message  name="message" rows="1" type="text" placeholder="Votre message ici...">
+
+            </ion-textarea>
+            <span id="messagecheck"></span>
+          </ion-item>
+          
+        </ion-col>
+      </ion-row>
+
+      
+      
+      <ion-row style="position:fixed;bottom:100px;width:92%;" id="fixedRow">
+        <ion-col>
+          <ion-button type="submit" id="submit" id="sendButton" color="secondary"  expand="block"  >
+            <span style="text-transform: uppercase;" id="obtenirOtpLabel">envoyer maintenant</span>
+            <ion-spinner name="circles" id="spinner" style="display: none;"></ion-spinner>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      
+    </form>
+  </ion-grid>
+  </ion-card>
+</ion-content>
