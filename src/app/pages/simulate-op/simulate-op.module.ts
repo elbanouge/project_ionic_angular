@@ -17,4 +17,4 @@ import { SimulateOpPage } from './simulate-op.page';
   ],
   declarations: [SimulateOpPage]
 })
-export class SimulateOpPageModule {}
+export class SimulateOpPageModule { }

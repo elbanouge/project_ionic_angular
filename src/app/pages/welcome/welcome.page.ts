@@ -9,11 +9,9 @@ import { AlertController, IonRouterOutlet, Platform } from '@ionic/angular';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
-  // constructor() {}
-  answer:any="";
+  answer: any = "";
 
-
-  ngOnInit() {}
+  ngOnInit() { }
 
   constructor(
     private platform: Platform,
@@ -22,14 +20,14 @@ export class WelcomePage implements OnInit {
   ) {
     StatusBar.setOverlaysWebView({ overlay: false });
     StatusBar.setStyle({ style: Style.Dark });
-    StatusBar.setBackgroundColor({color:"#855fa0"});
+    StatusBar.setBackgroundColor({ color: "#855fa0" });
     this.platform.backButton.subscribeWithPriority(0, () => {
       // if (this.routerOutlet.canGoBack() || !this.routerOutlet.canGoBack()) {
-        // this.presentAlert().then(data=>{
-        //   if(this.answer=="ok"){
-        //     App.exitApp();
-        //   }
-        // });
+      // this.presentAlert().then(data=>{
+      //   if(this.answer=="ok"){
+      //     App.exitApp();
+      //   }
+      // });
       // }
       this.presentAlert();
     });
@@ -50,7 +48,7 @@ export class WelcomePage implements OnInit {
         }
       }, {
         text: 'OK',
-        role:"ok",
+        role: "ok",
         id: 'confirm-button',
         handler: (answer) => {
           App.exitApp();

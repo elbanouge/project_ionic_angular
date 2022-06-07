@@ -160,7 +160,7 @@ export class PhotoService {
 
 
   public postData(formData: FormData): Observable<any> {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') });
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') });
     //headers.append('Content-Type', 'application/json');
     //headers.append('Accept', '*/*');
     return this.http.post<boolean>(`${API_URL2}/api/ocr/parse`, formData, { headers, responseType: 'text' as 'json' });
@@ -175,7 +175,7 @@ export class PhotoService {
   }
 
   public deleteOCR1(id: string): Observable<any> {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') });
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') });
     //headers.append('Content-Type', 'application/json');
     //headers.append('Accept', '*/*');
     return this.http.delete<boolean>(`${API_URL2}/api/ocr/delete/${id}`, { headers, responseType: 'text' as 'json' });

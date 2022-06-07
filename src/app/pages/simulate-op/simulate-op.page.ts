@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Credit } from 'src/app/models/credit/credit';
-import { UserData } from 'src/app/models/user/user-data';
-import { CreditServices } from 'src/app/services/credit-services';
+import { Credit } from 'src/app/models/credit';
+import { CreditService } from 'src/app/services/credit.service';
+import { LoadService } from 'src/app/services/load.service';
+import { SimulationService } from 'src/app/services/simulation.service';
 
 @Component({
   selector: 'app-simulate-op',
@@ -10,13 +11,18 @@ import { CreditServices } from 'src/app/services/credit-services';
   styleUrls: ['./simulate-op.page.scss'],
 })
 export class SimulateOpPage implements OnInit {
-  credit: Credit = new Credit('5000', '12', '498.2', '71.6', '498.2', new UserData('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''), '', '', '');
+  credit: Credit = new Credit();
   new: any;
 
   path: string;
-  constructor(private creditService: CreditServices, private router: Router) {
+  constructor(private loadService: LoadService, private creditService: CreditService, private simulationService: SimulationService, private router: Router) {
+    this.credit.capital = '5000';
     this.credit.taux = '5.5';
-    this.creditService.calculMensualite(this.credit).subscribe(data => {
+    this.credit.duree = '12';
+    this.credit.minMensualite = '71.6';
+    this.credit.maxMensualite = '498.2';
+    this.simulationService.calculMensualite(this.credit).subscribe(data => {
+      localStorage.setItem('currentCredit', JSON.stringify(data));
       this.credit = data;
     });
   }
@@ -27,7 +33,7 @@ export class SimulateOpPage implements OnInit {
     if (this.path.split('/')[2] != undefined) {
       this.new = this.path.split('/')[2];
       if (this.new == 'update') {
-        this.creditService.getById(this.creditService.id).subscribe(data => {
+        this.creditService.getById(this.credit.id).subscribe(data => {
           this.credit = data;
         }, err => {
         })
@@ -36,7 +42,8 @@ export class SimulateOpPage implements OnInit {
   }
 
   CapitalNgModelChange(value) {
-    this.creditService.calculMensualite(this.credit).subscribe(data => {
+    this.simulationService.calculMensualite(this.credit).subscribe(data => {
+      localStorage.setItem('currentCredit', JSON.stringify(data));
       this.credit = data;
       var temp: string;
       if (this.credit.minMensualite > this.credit.maxMensualite) {
@@ -50,7 +57,8 @@ export class SimulateOpPage implements OnInit {
   }
 
   DureeNgModelChange(value) {
-    this.creditService.calculMensualite(this.credit).subscribe(data => {
+    this.simulationService.calculMensualite(this.credit).subscribe(data => {
+      localStorage.setItem('currentCredit', JSON.stringify(data));
       this.credit = data;
       var temp: string;
       if (this.credit.minMensualite > this.credit.maxMensualite) {
@@ -62,14 +70,19 @@ export class SimulateOpPage implements OnInit {
       document.getElementById("mensualite").setAttribute("max", this.credit.maxMensualite);
     }, err => { });
   }
+
   MensualiteNgModelChange(value) {
-    this.creditService.calculDuree(this.credit).subscribe(data => {
+    this.credit = JSON.parse(localStorage.getItem('credit'));
+    this.credit.mensualite = value;
+    console.log(this.credit);
+    this.simulationService.calculDuree(this.credit).subscribe(data => {
+      localStorage.setItem('currentCredit', JSON.stringify(data));
       this.credit = data;
     }, err => { });
   }
 
   onSubmitResult() {
-    this.creditService.setResult(this.credit);
+    this.simulationService.setResult(this.loadService.loadCredit());
     if (this.path.split('/')[2] != undefined) {
       if (this.new == 'new')
         this.router.navigateByUrl('simulate-res/new')

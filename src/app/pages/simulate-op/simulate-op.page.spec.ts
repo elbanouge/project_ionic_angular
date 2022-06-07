@@ -9,7 +9,7 @@ describe('SimulateOpPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SimulateOpPage ],
+      declarations: [SimulateOpPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

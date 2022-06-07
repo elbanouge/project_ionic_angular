@@ -6,262 +6,264 @@
       </ion-button>
     </ion-buttons>
     <ion-title color="secondary" style="text-align: center;">informations personnelles</ion-title>
-  
-    </ion-toolbar>
+
+  </ion-toolbar>
 </ion-header>
 
-<ion-content  >
+<ion-content>
   <ion-card color="primary" style="height: 97%;overflow: scroll;">
     <ion-grid>
-  <ion-slides [options]="sliderConfig">
-    <ion-slide  id="previous">
-      <form  (ngSubmit) = "Valider()" novalidate style="padding-left: 0px;padding-right: 0px;" >
-        <div style="margin-top: 50px;">
-          <ion-radio-group [(ngModel)]="userModel.sexe" name="sexe" required
-            #sexe="ngModel" >
-            <ion-grid>
-              <ion-row>
-                <ion-col style="width: 50%;">
-                  <ion-item>
-                    <ion-icon name="female-sharp"></ion-icon>
-                    <ion-radio #femme slot="start" value="femme" checked="true"></ion-radio>
-                  </ion-item>
-                </ion-col>
-                <ion-col style="width: 50%;">
-                    <ion-item >
-                      <ion-icon name="male-sharp"></ion-icon>
-                      <ion-radio #homme slot="start" value="homme"></ion-radio>
-                    </ion-item>
-                </ion-col>
+      <ion-slides [options]="sliderConfig">
+        <ion-slide id="previous">
+          <form (ngSubmit)="Valider()" novalidate style="padding-left: 0px;padding-right: 0px;">
+            <div style="margin-top: 50px;">
+              <ion-radio-group [(ngModel)]="userModel.sexe" name="sexe" required #sexe="ngModel">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col style="width: 50%;">
+                      <ion-item>
+                        <ion-icon name="female-sharp"></ion-icon>
+                        <ion-radio #femme slot="start" value="femme" checked="true"></ion-radio>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col style="width: 50%;">
+                      <ion-item>
+                        <ion-icon name="male-sharp"></ion-icon>
+                        <ion-radio #homme slot="start" value="homme"></ion-radio>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-radio-group>
+            </div>
+            <!-- <ion-grid> -->
+            <ion-row>
+              <ion-col>
+                <ion-label>Êtes-vous client ?</ion-label>
+              </ion-col>
             </ion-row>
-            </ion-grid>
-          </ion-radio-group>
-        </div>
-        <!-- <ion-grid> -->
-          <ion-row><ion-col>
-            <ion-label>Êtes-vous client ?</ion-label>
-          </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button class="button" fill="clear" (click)="clickAction()" [ngClass]="{'clicked':beenClicked}">Oui</ion-button>
-              <ion-button class="button" fill="clear" (click)="clickAction2()" [ngClass]="{'clicked2':beenClicked2}">Non</ion-button>              
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-label>Êtes-vous un fonctionnaire ?</ion-label>
-            </ion-col>
-          </ion-row>
-          <ion-row  >
-            <ion-col>
-              <ion-button class="button" fill="clear" (click)="clickAction3()" [ngClass]="{'clicked3':beenClicked3}">Oui</ion-button>
-              <ion-button  class="button" fill="clear" (click)="clickAction4()" [ngClass]="{'clicked4':beenClicked4}">Non</ion-button>
-            </ion-col>
-          </ion-row  >
-          <ion-row >
-            <ion-col>
-              <ion-label>Quel est votre revenu mensuel ?</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-button class="button" fill="clear" (click)="clickAction5()" [ngClass]="{'clicked':beenClicked5}">Inférieur ou égale à 7000Dh</ion-button>
-              <ion-button class="button" fill="clear" (click)="clickAction6()" [ngClass]="{'clicked':beenClicked6}">Entre 7000Dh et 20 000Dh</ion-button>
-              <ion-button class="button" fill="clear" (click)="clickAction7()" [ngClass]="{'clicked':beenClicked7}">Supérieur à 20 000Dh</ion-button>
-          </ion-col>
-          </ion-row>
-          
-        <!-- </ion-grid> -->
-          
-        <!-- style="position: fixed; bottom: 0%;width:90%;margin-bottom: 0%;" -->
-        <br>
-        <br>
-        <ion-row  style="position: fixed; bottom: 0%;width:90%;margin-bottom: 0%;" >
-          <ion-toolbar style="--background: transparent">
-                <a style="position: fixed; bottom: 0%;right: 2%;" href="personalinfos#next"><ion-icon color="secondary" slot="icon-only" name="arrow-forward"></ion-icon>
-                </a>
-          </ion-toolbar>
-        </ion-row>
-      </form>
-    </ion-slide>
-    <ion-slide id="next">
-      <form (ngSubmit) = "Valider(homme,femme)" novalidate>
-        <div [formGroup]="ionicForm">
-          <ion-item lines="full">
-            <ion-label position="floating" class="position-label-inside">Nom 
-              <span class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <ion-input [ngModelOptions]="{standalone: true}" formControlName="lastname" type="text" [(ngModel)]="userModel.lastName" name="lastname" required
-            ></ion-input>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
-            Nom est requis.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.minlength">
-            Nom doit comporter au moins 2 caractères.
-          </small>
-        </div>
-            
-        <div [formGroup]="ionicForm">
-          <ion-item lines="full">
-            <ion-label position="floating" class="position-label-inside">Prénom 
-              <span class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <ion-input [ngModelOptions]="{standalone: true}" formControlName="firstname" type="text" required [(ngModel)]="userModel.firstName"  
-              name="firstame" required
-              ></ion-input>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
-            Prénom est requis.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.minlength">
-            Prénom doit comporter au moins 2 caractères.
-          </small>
-        </div>  
-        <div  [formGroup]="ionicForm">
-          <ion-item>
-            <ion-label position="floating" class="position-label-inside">Date de Naissance 
-              <span  class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <div style="margin-bottom: 8px;"></div>
-            <ion-input [ngModelOptions]="{standalone: true}"  formControlName="date" [value]="dateValue2" [(ngModel)]="userModel.dateNai" 
-              name="dateNai" required> 
-                <ion-button fill="clear" style="float: right;" fill="clear" id="open-date-input-2">
-                  <ion-icon icon="calendar"></ion-icon>
+            <ion-row>
+              <ion-col>
+                <ion-button class="button" fill="clear" (click)="clickAction()" [ngClass]="{'clicked':beenClicked}">Oui
                 </ion-button>
-            </ion-input>
-            <ion-popover trigger="open-date-input-2" show-backdrop="false">
-              <ng-template>
-                <ion-datetime [ngModelOptions]="{standalone: true}"  color="secondary"
-                  #popoverDatetime2
-                  presentation="date"
-                  (ionChange)="dateValue2 = formatDate(popoverDatetime2.value)"
-                ></ion-datetime>
-              </ng-template>
-            </ion-popover>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
-            Date de Naissance est requis.
-          </small> 
-        </div>
-        
-        <div  [formGroup]="ionicForm">
-          <ion-item lines="full" >
-            <ion-label position="floating" class="position-label-inside">Email 
-              <span class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <ion-input [ngModelOptions]="{standalone: true}" formControlName="email" type="email" [(ngModel)]="userModel.email" 
-              name="email" required (ionChange)="ionChangeEmail()">
-            </ion-input>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
-            Email est requis.<br>
-          </small>
-          
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
-            Veuillez fournir un Email valide.<br>
-          </small>
-          
-          <small class="error ion-padding" *ngIf="errorMessageMail">{{errorMessageMail}}</small>          
-        </div>
-                 
-        <div  [formGroup]="ionicForm">
-          <ion-item lines="full">
-            <ion-label position="floating" class="position-label-inside">Téléphone 
-              <span class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <ion-input [ngModelOptions]="{standalone: true}" formControlName="phone" type="text" [(ngModel)]="userModel.phone" 
-              name="phone" required>
-            </ion-input>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.required">
-            Numéro de téléphone est requis.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.pattern">
-            Seules les valeurs numériques sont autorisées.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.minlength">
-            Le numéro de téléphone doit comporter au moins 10 caractères.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.maxlength">
-            Le numéro de téléphone doit comporter au maximum 10 caractères.
-          </small>
-        </div>
-       
-        <div  [formGroup]="ionicForm">
-          <ion-item lines="full" >
-            <ion-label position="floating" class="position-label-inside">CIN 
-              <span class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <ion-input [ngModelOptions]="{standalone: true}" formControlName="cinval" type="text" [(ngModel)]="userModel.cin" 
-              name="cin" required
-              >
-            </ion-input>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.cinval.errors?.required">
-            CIN  est requis.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.cinval.errors?.pattern">
-            1 ou 2 caractères + 5 ou 6 numéros.
-          </small>
-        </div>
-     
-        <div  [formGroup]="ionicForm">
-        <ion-item lines="full" >
-          <ion-label position="floating" class="position-label-inside">Nationalité 
-            <span class="form-required" title="Ce champ est requis.">*</span>
-          </ion-label>
-          <ion-input [ngModelOptions]="{standalone: true}" formControlName="nationalite" type="text" [(ngModel)]="userModel.nationalite" 
-            name="nationalite" required
-            >
-          </ion-input>
-        </ion-item>
-        <small class="error ion-padding" *ngIf="isSubmitted && errorControl.nationalite.errors?.required">
-          Nationalité  est requis.
-        </small>
-        </div>
-       
-        <div  [formGroup]="ionicForm">
-          <ion-item lines="full" >
-            <ion-label position="floating" class="position-label-inside">Adresse 
-              <span class="form-required" title="Ce champ est requis.">*</span>
-            </ion-label>
-            <ion-textarea [ngModelOptions]="{standalone: true}" formControlName="address" rows="1" type="text" [(ngModel)]="userModel.address" 
-              name="adress" required>
-            </ion-textarea>
-          </ion-item>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.required">
-            Adresse est requis.
-          </small>
-          <small class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.minlength">
-            Adresse doit comporter au moins 2 caractères.
-          </small>  
-        </div>   
-          
-        <div>
-          <ion-row style="margin-top: 10px;">
-            <ion-toolbar color="primary">
-              <ion-button color="secondary" id="EnvoyerButton"   expand="block"  shape="round" type="submit">
-                <ion-label style="color: white;" id="obtenirEnvoyerLabel">Valider</ion-label>
-                <ion-spinner name="circles" id="spinnerEnvoyer" style="display: none;"></ion-spinner>
-                <!-- <ion-icon name="reload-circle-outline" style="width:20px"></ion-icon> -->
-              </ion-button>
-          </ion-toolbar>
-        </ion-row>
-          <!-- <ion-button class="valider" color="secondary" type="submit">Valider</ion-button><br> -->
-        
-        <ion-row   >
-          <ion-toolbar style="--background: transparent">
-                <a style="position: fixed; bottom: 0%;left: 1%;" href="personalinfos#previous">
-                  <ion-icon color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
-                </a>
-          </ion-toolbar>
-        </ion-row>
-        </div>
-        </form>
-      </ion-slide>
-  </ion-slides>
+                <ion-button class="button" fill="clear" (click)="clickAction2()" [ngClass]="{'clicked2':beenClicked2}">
+                  Non</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-label>Êtes-vous un fonctionnaire ?</ion-label>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button class="button" fill="clear" (click)="clickAction3()" [ngClass]="{'clicked3':beenClicked3}">
+                  Oui</ion-button>
+                <ion-button class="button" fill="clear" (click)="clickAction4()" [ngClass]="{'clicked4':beenClicked4}">
+                  Non</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-label>Quel est votre revenu mensuel ?</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-button class="button" fill="clear" (click)="clickAction5()" [ngClass]="{'clicked':beenClicked5}">
+                  Inférieur ou égale à 7000Dh</ion-button>
+                <ion-button class="button" fill="clear" (click)="clickAction6()" [ngClass]="{'clicked':beenClicked6}">
+                  Entre 7000Dh et 20 000Dh</ion-button>
+                <ion-button class="button" fill="clear" (click)="clickAction7()" [ngClass]="{'clicked':beenClicked7}">
+                  Supérieur à 20 000Dh</ion-button>
+              </ion-col>
+            </ion-row>
 
-  </ion-grid>
+            <!-- </ion-grid> -->
+
+            <!-- style="position: fixed; bottom: 0%;width:90%;margin-bottom: 0%;" -->
+            <br>
+            <br>
+            <ion-row style="position: fixed; bottom: 0%;width:90%;margin-bottom: 0%;">
+              <ion-toolbar style="--background: transparent">
+                <a style="position: fixed; bottom: 0%;right: 2%;" href="personalinfos#next">
+                  <ion-icon color="secondary" slot="icon-only" name="arrow-forward"></ion-icon>
+                </a>
+              </ion-toolbar>
+            </ion-row>
+          </form>
+        </ion-slide>
+        <ion-slide id="next">
+          <form (ngSubmit)="Valider(homme,femme)" novalidate>
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">Nom
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="lastname" type="text"
+                  [(ngModel)]="userModel.lastName" name="lastname" required></ion-input>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.required">
+                Nom est requis.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.lastname.errors?.minlength">
+                Nom doit comporter au moins 2 caractères.
+              </small>
+            </div>
+
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">Prénom
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="firstname" type="text" required
+                  [(ngModel)]="userModel.firstName" name="firstame" required></ion-input>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.required">
+                Prénom est requis.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.firstname.errors?.minlength">
+                Prénom doit comporter au moins 2 caractères.
+              </small>
+            </div>
+            <div [formGroup]="ionicForm">
+              <ion-item>
+                <ion-label position="floating" class="position-label-inside">Date de Naissance
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <div style="margin-bottom: 8px;"></div>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="date" [value]="dateValue2"
+                  [(ngModel)]="userModel.dateNai" name="dateNai" required>
+                  <ion-button fill="clear" style="float: right;" fill="clear" id="open-date-input-2">
+                    <ion-icon icon="calendar"></ion-icon>
+                  </ion-button>
+                </ion-input>
+                <ion-popover trigger="open-date-input-2" show-backdrop="false">
+                  <ng-template>
+                    <ion-datetime [ngModelOptions]="{standalone: true}" color="secondary" #popoverDatetime2
+                      presentation="date" (ionChange)="dateValue2 = formatDate(popoverDatetime2.value)"></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.date.errors?.required">
+                Date de Naissance est requis.
+              </small>
+            </div>
+
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">Email
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="email" type="email"
+                  [(ngModel)]="userModel.email" name="email" required (ionChange)="ionChangeEmail()">
+                </ion-input>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.required">
+                Email est requis.<br>
+              </small>
+
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.email.errors?.pattern">
+                Veuillez fournir un Email valide.<br>
+              </small>
+
+              <small class="error ion-padding" *ngIf="errorMessageMail">{{errorMessageMail}}</small>
+            </div>
+
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">Téléphone
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="phone" type="text"
+                  [(ngModel)]="userModel.phone" name="phone" required>
+                </ion-input>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.required">
+                Numéro de téléphone est requis.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.pattern">
+                Seules les valeurs numériques sont autorisées.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.minlength">
+                Le numéro de téléphone doit comporter au moins 10 caractères.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.phone.errors?.maxlength">
+                Le numéro de téléphone doit comporter au maximum 10 caractères.
+              </small>
+            </div>
+
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">CIN
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="cinval" type="text"
+                  [(ngModel)]="userModel.cin" name="cin" required>
+                </ion-input>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.cinval.errors?.required">
+                CIN est requis.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.cinval.errors?.pattern">
+                1 ou 2 caractères + 5 ou 6 numéros.
+              </small>
+            </div>
+
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">Nationalité
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-input [ngModelOptions]="{standalone: true}" formControlName="nationalite" type="text"
+                  [(ngModel)]="userModel.nationalite" name="nationalite" required>
+                </ion-input>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.nationalite.errors?.required">
+                Nationalité est requis.
+              </small>
+            </div>
+
+            <div [formGroup]="ionicForm">
+              <ion-item lines="full">
+                <ion-label position="floating" class="position-label-inside">Adresse
+                  <span class="form-required" title="Ce champ est requis.">*</span>
+                </ion-label>
+                <ion-textarea [ngModelOptions]="{standalone: true}" formControlName="address" rows="1" type="text"
+                  [(ngModel)]="userModel.address" name="adress" required>
+                </ion-textarea>
+              </ion-item>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.required">
+                Adresse est requis.
+              </small>
+              <small class="error ion-padding" *ngIf="isSubmitted && errorControl.address.errors?.minlength">
+                Adresse doit comporter au moins 2 caractères.
+              </small>
+            </div>
+
+            <div>
+              <ion-row style="margin-top: 10px;">
+                <ion-toolbar color="primary">
+                  <ion-button color="secondary" id="EnvoyerButton" expand="block" shape="round" type="submit">
+                    <ion-label style="color: white;" id="obtenirEnvoyerLabel">Valider</ion-label>
+                    <ion-spinner name="circles" id="spinnerEnvoyer" style="display: none;"></ion-spinner>
+                    <!-- <ion-icon name="reload-circle-outline" style="width:20px"></ion-icon> -->
+                  </ion-button>
+                </ion-toolbar>
+              </ion-row>
+              <!-- <ion-button class="valider" color="secondary" type="submit">Valider</ion-button><br> -->
+
+              <ion-row>
+                <ion-toolbar style="--background: transparent">
+                  <a style="position: fixed; bottom: 0%;left: 1%;" href="personalinfos#previous">
+                    <ion-icon color="secondary" slot="icon-only" name="arrow-back"></ion-icon>
+                  </a>
+                </ion-toolbar>
+              </ion-row>
+            </div>
+          </form>
+        </ion-slide>
+      </ion-slides>
+
+    </ion-grid>
   </ion-card>
-  
+
 </ion-content>

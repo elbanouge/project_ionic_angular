@@ -1,37 +1,45 @@
-ion-content{
+ion-content {
     font-family: Roboto-BoldItalic;
-    ion-button{
-        --background:#855fa0;
+
+    ion-button {
+        --background: #855fa0;
         font-family: Roboto-BoldItalic;
     }
-    ion-card{
+
+    ion-card {
         height: 97%;
         border-radius: 20px;
         box-shadow: 2px 1px 5px 2px #c4c0d5;
     }
-    ion-grid{
+
+    ion-grid {
         color: black;
-        h1{
+
+        h1 {
             font-family: Roboto, "Helvetica Neue", sans-serif;
             // font-family:  BeautifulPeoplePersonalUse ;
             font-size: xx-large;
             text-align: center;
             padding-bottom: 20px;
-            border-bottom:solid #c6aed7;
+            border-bottom: solid #c6aed7;
         }
-        ion-range{
+
+        ion-range {
             color: #855fa0;
             padding-top: 10px;
         }
-        ion-label{
+
+        ion-label {
             font-size: large;
             font-weight: bold;
         }
-        ion-col ion-button{
+
+        ion-col ion-button {
             float: right;
         }
     }
-    img{
+
+    img {
         border-radius: 20px;
     }
 }

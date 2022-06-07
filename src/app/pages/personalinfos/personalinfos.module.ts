@@ -12,10 +12,10 @@ import { PersonalinfosPage } from './personalinfos.page';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule, 
-    PersonalinfosPageRoutingModule,ReactiveFormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
+    IonicModule,
+    PersonalinfosPageRoutingModule, ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
   ],
   declarations: [PersonalinfosPage]
 })
-export class PersonalinfosPageModule {}
+export class PersonalinfosPageModule { }

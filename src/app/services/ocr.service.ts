@@ -6,7 +6,7 @@ import { Storage } from '@capacitor/storage';
 @Injectable({
   providedIn: 'root'
 })
-export class OcrServicesService {
+export class OcrService {
 
   public photos: UserPhoto[] = [];
   constructor() { }
@@ -22,12 +22,12 @@ export class OcrServicesService {
       webviewPath: capturedPhoto.webPath
     });
     const savedImageFile = await this.savePicture(capturedPhoto);
-  this.photos.unshift(savedImageFile);
+    this.photos.unshift(savedImageFile);
   }
   private async savePicture(photo: Photo) {
     // Convert photo to base64 format, required by Filesystem API to save
     const base64Data = await this.readAsBase64(photo);
-  
+
     // Write the file to the data directory
     const fileName = new Date().getTime() + '.jpeg';
     const savedFile = await Filesystem.writeFile({
@@ -35,7 +35,7 @@ export class OcrServicesService {
       data: base64Data,
       directory: Directory.Data
     });
-  
+
     // Use webPath to display the new image instead of base64 since it's
     // already loaded into memory
     return {
@@ -47,15 +47,15 @@ export class OcrServicesService {
     // Fetch the photo, read as a blob, then convert to base64 format
     const response = await fetch(photo.webPath!);
     const blob = await response.blob();
-  
+
     return await this.convertBlobToBase64(blob) as string;
   }
-  
+
   private convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;
     reader.onload = () => {
-        resolve(reader.result);
+      resolve(reader.result);
     };
     reader.readAsDataURL(blob);
   });

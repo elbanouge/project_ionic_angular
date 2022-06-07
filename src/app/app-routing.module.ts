@@ -19,18 +19,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomePageModule)
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupPageModule)
-  },
-  {
-    path: 'types',
-    loadChildren: () => import('./pages/types/types.module').then(m => m.TypesPageModule)
-  },
-  {
-    path: 'simulate',
-    loadChildren: () => import('./pages/simulate/simulate.module').then(m => m.SimulatePageModule)
-  },
-  {
     path: 'personalinfos',
     loadChildren: () => import('./pages/personalinfos/personalinfos.module').then(m => m.PersonalinfosPageModule)
   },
@@ -78,18 +66,6 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomePageModule)
-  },
-  {
-    path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupPageModule)
-  },
-  {
-    path: 'types',
-    loadChildren: () => import('./pages/types/types.module').then(m => m.TypesPageModule)
-  },
-  {
-    path: 'simulate',
-    loadChildren: () => import('./pages/simulate/simulate.module').then(m => m.SimulatePageModule)
   },
   {
     path: 'personalinfos',

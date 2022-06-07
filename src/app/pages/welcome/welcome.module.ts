@@ -19,6 +19,6 @@ import { InputModule } from '../../components/input/input.module';
   ],
   declarations: [WelcomePage]
 })
-export class WelcomePageModule {}
+export class WelcomePageModule { }
 
 

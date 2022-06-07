@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Email } from '../models/email/email';
-import { UserData } from '../models/user/user-data';
+import { Email } from '../models/email';
+import { User } from '../models/user';
+import { LoadService } from './load.service';
 
 
 let API_EMAIL_URL = environment.apiBaseUrl + "/api/email/";
@@ -17,23 +18,19 @@ let API_URL = environment.apiBaseUrl + "/api/user/";
 export class AuthService {
 
   userEmail: Email = new Email();
-  constructor(private http: HttpClient, private router: Router) { }
-
-  register(user: UserData): Observable<any> {
-    return this.http.post(API_URL + 'registration', JSON.stringify(user),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
-  }
+  constructor(private http: HttpClient, private router: Router, private loadService: LoadService) { }
 
   findAllUsers(): Observable<any> {
     return this.http.get(API_URL + "all",
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
-  login(user: UserData): Observable<any> {
+  login(user: User): Observable<any> {
     // this.userEmail.email=user.email;
     return this.http.post(API_URL + 'login', JSON.stringify(user),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } }).pipe(catchError(this.handleError));
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } }).pipe(catchError(this.handleError));
   }
+
   private handleError(httpError: HttpErrorResponse) {
     if (httpError.error instanceof ErrorEvent) {
       //console.error('An error occurred:', httpError.error.message);
@@ -45,58 +42,74 @@ export class AuthService {
     return throwError(httpError.error);
   }
 
-  changePassword(user: UserData): Observable<any> {
+  changePassword(user: User): Observable<any> {
     return this.http.put(API_URL + 'changePassword/' + user.email, user.password,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
-  Personalinfos(user: UserData): Observable<any> {
-    // this.userEmail.email=user.email;
-    return this.http.post(API_URL + 'Personalinfos', JSON.stringify(user),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+  registration(user: User): Observable<any> {
+    if (user.sexe == "homme") {
+      user.sexe = "true";
+    } else {
+      user.sexe = "false";
+    }
+
+    user.username = user.email.split("@")[0].trim();
+    user.password = user.lastName.toLocaleLowerCase().trim();
+
+    return this.http.post(API_URL + 'registration', JSON.stringify(user),
+      { headers: { "Content-Type": "application/json; charset=UTF-8" } });
   }
 
   sendOTP(userEmail: Email): Observable<any> {
     return this.http.post(API_EMAIL_URL + 'sendOTP', JSON.stringify(userEmail),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
   verifyOTP(otp: number): Observable<any> {
-    return this.http.post(API_EMAIL_URL + 'verifyOTP', JSON.stringify(otp),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') }, observe: 'response' as 'response' })
+    return this.http.get(API_EMAIL_URL + 'verifyOTP/' + this.loadService.loadUser().email + '/' + otp,
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
 
   createPassword(email: string, password: string): Observable<any> {
-    return this.http.put(API_URL + 'createPassword/' + email, password,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+    const json = '{ "email": "' + email + '", "password": "' + password + '"} ';
+
+    console.log(json);
+
+    const obj = JSON.parse(json);
+
+
+
+    return this.http.put(API_URL + 'createPassword', obj,
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
   findByEmailpost(email: string): Observable<any> {
     return this.http.post(API_URL + 'findByEmail/' + email,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') }, observe: 'response' as 'response' })
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
 
   deleteByEmail(email: string): Observable<any> {
     return this.http.delete(API_URL + 'delete/' + email,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') }, observe: 'response' as 'response' })
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
   //deletebyid
   deletebyid(id: number): Observable<any> {
     return this.http.delete(API_URL + 'deletebyid/' + id,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') }, observe: 'response' as 'response' })
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
   getUserData() {
     return this.http.put(API_URL + 'getUserData/' + 'lolo2000tototata@gmail.com',
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
-  updateUser(email: string, user: UserData) {
+  updateUser(email: string, user: User) {
     return this.http.put(API_URL + 'update/' + email, user,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
   getUser() {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
 
   logout() {
@@ -108,11 +121,11 @@ export class AuthService {
 
   sendEmail(userEmail: Email): Observable<any> {
     return this.http.post(API_EMAIL_URL + 'sendEmail', JSON.stringify(userEmail),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
   sendEmailToAdmin(userEmail: Email): Observable<any> {
     return this.http.post(API_EMAIL_URL + 'sendEmailToAdmin', JSON.stringify(userEmail),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('banouge' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 }
