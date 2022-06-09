@@ -17,11 +17,11 @@ const routes: Routes = [
     children: [
       {
         path: 'profile',
-        loadChildren: () => import('../profile/profile.module').then( m => m.ProfilePageModule),
+        loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule),
       },
       {
         path: 'credit',
-        loadChildren: () => import('../credit/credit.module').then( m => m.CreditPageModule),
+        loadChildren: () => import('../credit/credit.module').then(m => m.CreditPageModule),
         // children: [
         //   {
         //     path: '',
@@ -36,7 +36,7 @@ const routes: Routes = [
       },
       {
         path: 'contactus',
-        loadChildren: () => import('../contactus/contactus.module').then( m => m.ContactusPageModule)
+        loadChildren: () => import('../contactus/contactus.module').then(m => m.ContactusPageModule)
       },
       {
         path: '',
@@ -56,4 +56,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomePageRoutingModule {}
+export class HomePageRoutingModule { }

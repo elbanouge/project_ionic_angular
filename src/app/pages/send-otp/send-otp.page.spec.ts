@@ -9,7 +9,7 @@ describe('SendOTPPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SendOTPPage ],
+      declarations: [SendOTPPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

@@ -17,4 +17,4 @@ import { SimulateResPage } from './simulate-res.page';
   ],
   declarations: [SimulateResPage]
 })
-export class SimulateResPageModule {}
+export class SimulateResPageModule { }

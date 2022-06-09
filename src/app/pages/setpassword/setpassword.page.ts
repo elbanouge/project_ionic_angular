@@ -87,18 +87,24 @@ export class SetpasswordPage implements OnInit {
                 //taskId:string,id:number
                 this.camundaServices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
                   data => {
+                    console.log(data);
+                    this.router.navigate(['/ocrhome']);
 
-                    this.camundaServices.completeTaskOTP(this.credit.user, this.credit.taskId).subscribe(
-                      ass => {
-                        console.log(ass);
-                        this.router.navigate(['/ocrhome']);
-                      },
-                      lay => {
-                        spinner.style.display = "none";
-                        document.getElementById("sendButton").removeAttribute("disabled");
-                        obtenirOtpLabel.style.display = "block";
-                        //console.error(lay);
-                      })
+                    // this.camundaServices.completeTaskOTP(this.credit.user, this.credit.taskId).subscribe(
+                    //   data => {
+                    //     console.log(data);
+                    //     this.router.navigate(['/ocrhome']);
+                    //   },
+                    //   error => {
+                    //     console.error(error);
+                    //     spinner.style.display = "none";
+                    //     document.getElementById("sendButton").removeAttribute("disabled");
+                    //     obtenirOtpLabel.style.display = "block";
+                    //   }
+                    // );
+                  },
+                  error => {
+                    console.error(error);
                   }
                 );
               },

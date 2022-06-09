@@ -1,67 +1,74 @@
-ion-content{
-    ion-button{
-        --background:white;
-        // font-family: Roboto-BoldItalic;
-    }
-    ion-card{
-        height: 97%;
-        border-radius: 20px;
-        box-shadow: 2px 1px 5px 2px #c4c0d5;
-    }
-    ion-grid{
-        // margin-top:50px;
-        padding-left: 10px;
-        color: black;
-        h1{
-            font-family: Roboto, "Helvetica Neue", sans-serif;
-            font-size: xx-large;
-            text-align: center;
-        }
-        #firstRow{
-            margin-top: 70px;
-        }
-        ion-label{
-            font-weight: bold;
-            text-align: center;
-        }
-        ion-col ion-button{
-            float: right;
-        }
-        ion-row{
-          width: 97%;
-          ion-item{
-            --background:lavender;
-            padding-bottom: 20px;
-          }
-        }
+ion-content {
+  ion-button {
+    --background: white;
+    // font-family: Roboto-BoldItalic;
+  }
+
+  ion-card {
+    height: 97%;
+    border-radius: 20px;
+    box-shadow: 2px 1px 5px 2px #c4c0d5;
+  }
+
+  ion-grid {
+    // margin-top:50px;
+    padding-left: 10px;
+    color: black;
+
+    h1 {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      font-size: xx-large;
+      text-align: center;
     }
 
-  .display  
-  {  
-    background-color:#222;  
-    width: 89%; 
-    position:relative;  
-    left:15px;  
-    top:20px;  
-    height:40px;  
-  }  
-  .display input  
-  {  
-    position:relative;  
-    left:2px;  
-    top:2px; 
-    width: 99%; 
-    height:35px;  
-    color:black;  
-    background-color:#bccd95;  
-    font-size:21px;  
-    text-align:right;  
-  } 
-  .box  
-  {  
-    background-color:#3d4543;  
-    height:100px;  
-    width: 100%; 
-    border-radius:10px;  
-  } 
+    #firstRow {
+      margin-top: 70px;
+    }
+
+    ion-label {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    ion-col ion-button {
+      float: right;
+    }
+
+    ion-row {
+      width: 97%;
+
+      ion-item {
+        --background: lavender;
+        padding-bottom: 20px;
+      }
+    }
+  }
+
+  .display {
+    background-color: #222;
+    width: 89%;
+    position: relative;
+    left: 15px;
+    top: 20px;
+    height: 40px;
+  }
+
+  .display input {
+    position: relative;
+    left: 2px;
+    top: 2px;
+    width: 99%;
+    height: 35px;
+    color: black;
+    background-color: #bccd95;
+    font-size: 21px;
+    text-align: right;
+  }
+
+  .box {
+    background-color: #3d4543;
+    height: 100px;
+    width: 100%;
+    border-radius: 10px;
+  }
 }

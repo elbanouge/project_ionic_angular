@@ -28,13 +28,15 @@ export class ProfilePage implements OnInit {
   moneyForm: FormGroup;
   submittedPersonForm = false;
   submittedMoneyForm = false;
-  connection: boolean = false;
+  connection: boolean = true;
   list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
   ngOnInit() {
     this.authServices.findByEmailpost(this.authServices.getUser().email).subscribe(data => {
-      this.user = data;
-      if (this.user.sexe == "femme") {
+      this.user = data.body;
+      console.log(this.user);
+
+      if (this.user.sexe == "false") {
         document.getElementsByClassName('sexe')[0].setAttribute("style", "--background:#370791;");
       }
       else {

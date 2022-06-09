@@ -17,4 +17,4 @@ import { OcropPage } from './ocrop.page';
   ],
   declarations: [OcropPage]
 })
-export class OcropPageModule {}
+export class OcropPageModule { }

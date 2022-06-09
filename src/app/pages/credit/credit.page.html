@@ -16,37 +16,38 @@
         <ion-col class="ion-padding">
           <ion-icon class="icon" (click)="refresh()" name="refresh-sharp" color="secondary" id="edit"></ion-icon>
         </ion-col>
-      </ion-row>  
+      </ion-row>
       <ion-accordion-group style="margin-top: 60px;" id="first">
-        <ion-accordion  >
-          <ion-item slot="header" >
-        <ion-button  fill="clear"  style="width: 100%;height: 100%;padding-left: 0px;"  (click)="newCredit()">
-          <ion-icon style="padding-left: 0px;" class="add icon" name="add-sharp" slot="start" color="secondary"></ion-icon>
-          <ion-label>Nouveau Crédit</ion-label>
-        </ion-button>
-      </ion-item>
-      </ion-accordion>
+        <ion-accordion>
+          <ion-item slot="header">
+            <ion-button fill="clear" style="width: 100%;height: 100%;padding-left: 0px;" (click)="newCredit()">
+              <ion-icon style="padding-left: 0px;" class="add icon" name="add-sharp" slot="start" color="secondary">
+              </ion-icon>
+              <ion-label>Nouveau Crédit</ion-label>
+            </ion-button>
+          </ion-item>
+        </ion-accordion>
       </ion-accordion-group>
 
-      
+
       <!-- <ion-button (click)="editCredit()"  >
         <ion-icon class="create icon" name="create" slot="start" color="secondary"></ion-icon>
         <ion-label>Modifier Crédit</ion-label>
       </ion-button> -->
 
       <ion-accordion-group style="margin-top: 60px;">
-        <ion-accordion value="credit" >
+        <ion-accordion value="credit">
 
-          <ion-item slot="header" >
-              <ion-button  fill="clear"  style="width: 100%;height: 100%" >
-                <ion-icon class="create icon" name="close-sharp" slot="start" color="secondary"></ion-icon>
-                <ion-label>Annuler Crédit</ion-label>
-              </ion-button>
+          <ion-item slot="header">
+            <ion-button fill="clear" style="width: 100%;height: 100%">
+              <ion-icon class="create icon" name="close-sharp" slot="start" color="secondary"></ion-icon>
+              <ion-label>Annuler Crédit</ion-label>
+            </ion-button>
           </ion-item>
-      
+
           <ion-list slot="content" class="ion-no-padding list-accordion">
             <ion-item lines="none" *ngFor="let c of credit; index as position">
-              <ion-button fill="clear" style="width: 100%;height: 100%"  (click)="delete(c)">
+              <ion-button fill="clear" style="width: 100%;height: 100%" (click)="delete(c)">
                 <ion-icon class="close icon" name="trash" slot="start" color="secondary"></ion-icon>
                 <ion-label class="list">Le crédit {{c.creditdate}} du capital {{c.capital}}</ion-label>
               </ion-button>
@@ -54,8 +55,8 @@
 
             <div>
               <output *ngIf=successResponse class="success"><b>{{successResponse}}</b></output>
-          </div>
-          <br>
+            </div>
+            <br>
 
           </ion-list>
         </ion-accordion>
@@ -68,19 +69,19 @@
 
 
 
-      <ion-accordion-group  style="margin-top: 60px;">
-        <ion-accordion value="credit" >
+      <ion-accordion-group style="margin-top: 60px;">
+        <ion-accordion value="credit">
 
-          <ion-item slot="header" >
-              <ion-button  fill="clear"  style="width: 100%;height: 100%" >
-                <ion-icon class="etat icon" name="analytics-sharp" slot="start" color="secondary"></ion-icon>
-                <ion-label>Etat de Crédit </ion-label>
-              </ion-button>
+          <ion-item slot="header">
+            <ion-button fill="clear" style="width: 100%;height: 100%">
+              <ion-icon class="etat icon" name="analytics-sharp" slot="start" color="secondary"></ion-icon>
+              <ion-label>Etat de Crédit </ion-label>
+            </ion-button>
           </ion-item>
-      
+
           <ion-list slot="content" class="ion-no-padding list-accordion">
             <ion-item lines="none" *ngFor="let c of credit; index as position">
-              <ion-button fill="clear" style="width: 100%;height: 100%"  (click)="status(c)">
+              <ion-button fill="clear" style="width: 100%;height: 100%" (click)="status(c)">
                 <ion-icon class="etat icon" name="analytics" slot="start" color="secondary"></ion-icon>
                 <ion-label class="list">Le crédit {{c.creditdate}} du capital {{c.capital}}</ion-label>
               </ion-button>
@@ -91,4 +92,4 @@
 
     </ion-grid>
   </ion-card>
-</ion-content> 
+</ion-content>

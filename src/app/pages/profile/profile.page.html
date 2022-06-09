@@ -1,6 +1,6 @@
-<ion-header class="ion-no-border"  >
-  <ion-toolbar color="primary" >
-    <ion-title  style="color: black;text-align: center;">Mon Profile</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title style="color: black;text-align: center;">Mon Profile</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logout()">
         <ion-icon name="log-out-outline" color="secondary"></ion-icon>
@@ -9,180 +9,229 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-<ion-card color="primary">
-  
-  <ion-grid>
-    <ion-row style="height: 20%;" id="firstRow">
-      <ion-col class="ion-padding">
-        <ion-icon name="create-outline" id="edit" (click)="editOrSave(edit,save,'edit')" #edit color="secondary" ></ion-icon>
-        <ion-icon name="save-outline" style="display: none;" id="save" (click)="editOrSave(edit,save,'save')" #save color="secondary" ></ion-icon>
-        <ion-icon name="person-circle" color="secondary" style="font-size: 750%;left: 35%;position: absolute;top:70%;"></ion-icon>
-      </ion-col>
-    </ion-row>
-    <ion-row style="width: 93%;" id="secondRow">
-      <ion-col>
-       <ion-accordion-group>
-        <ion-accordion>
-          <ion-item slot="header" style="border-bottom-color: gray;border-bottom-width: thin;border-bottom-style: solid;" color="primary" lines="none">
-            <ion-label style="color: black;">Infos Personnelles</ion-label>
-          </ion-item>
-      
-          <ion-list style="--background: white;background-color: white;"
-           slot="content"  id="personList" class="ion-no-padding list-accordion" color="primary">
-            
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">CIN</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection"  type="text" [(ngModel)]="user.cin"  id="cin" name="cin" disabled style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+<ion-content>
+  <ion-card color="primary">
 
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Nom</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" type="text"  id="lastName" [(ngModel)]="user.lastName" name="lastName" disabled style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+    <ion-grid>
+      <ion-row style="height: 20%;" id="firstRow">
+        <ion-col class="ion-padding">
+          <ion-icon name="create-outline" id="edit" (click)="editOrSave(edit,save,'edit')" #edit color="secondary">
+          </ion-icon>
+          <ion-icon name="save-outline" style="display: none;" id="save" (click)="editOrSave(edit,save,'save')" #save
+            color="secondary"></ion-icon>
+          <ion-icon name="person-circle" color="secondary"
+            style="font-size: 750%;left: 35%;position: absolute;top:70%;"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row style="width: 93%;" id="secondRow">
+        <ion-col>
+          <ion-accordion-group>
+            <ion-accordion>
+              <ion-item slot="header"
+                style="border-bottom-color: gray;border-bottom-width: thin;border-bottom-style: solid;" color="primary"
+                lines="none">
+                <ion-label style="color: black;">Infos Personnelles</ion-label>
+              </ion-item>
 
-            <ion-item lines="none" color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Prénom</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" type="text"  id="firstName" name="firstName" [(ngModel)]="user.firstName" disabled  style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>  
+              <ion-list style="--background: white;background-color: white;" slot="content" id="personList"
+                class="ion-no-padding list-accordion" color="primary">
 
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Email</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" type="text"  id="email" name="email" [(ngModel)]="user.email" disabled style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">CIN</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" type="text" [(ngModel)]="user.cin" id="cin" name="cin" disabled
+                      style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Téléphone</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" id="phone" name="phone" [(ngModel)]="user.phone" disabled type="text" style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Nom</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName"
+                      disabled style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-            <ion-item lines="none" color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Sexe</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-button *ngIf="connection" shape="round" id="first" class="sexe" (click)="user.sexe='femme';choose($event)" disabled >F</ion-button>
-                <ion-button *ngIf="connection" shape="round" id="second" class="sexe" (click)="user.sexe='homme';choose($event)" disabled>H</ion-button>
-                <input *ngIf="connection" type="text" name="sexe" [(ngModel)]="user.sexe"  style="display:none;">
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>  
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Prénom</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" type="text" id="firstName" name="firstName"
+                      [(ngModel)]="user.firstName" disabled style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-            <ion-item lines="none" color="primary">
-              <ion-col >
-                <ion-label style="color: black;opacity: 1;">Date de naissance</ion-label>
-              </ion-col>
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Email</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" type="text" id="email" name="email" [(ngModel)]="user.email" disabled
+                      style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-              <ion-col >
-                <ion-input *ngIf="connection" type="text" name="date_nai"  id="date_nai_text"  [(ngModel)]="user.dateNai" disabled style="color:#855fa0;"></ion-input>
-                <ion-input *ngIf="connection" type="text" name="date_nai" (click)="presentPicker()"  id="date_nai_choose"  [(ngModel)]="user.dateNai" style="color:black;display: none;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>  
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Téléphone</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" id="phone" name="phone" [(ngModel)]="user.phone" disabled type="text"
+                      style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-            <ion-item lines="none" color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Adresse</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" name="address"  id="address" [(ngModel)]="user.address" disabled style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
-                
-            <ion-item lines="none" color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Nationalité</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" type="text" name="nationalite"  id="nationalite" [(ngModel)]="user.nationalite" disabled style="color:#855fa0;"></ion-input>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>  
-            
-           </ion-list>
-        </ion-accordion>
-        <ion-accordion color="primary">
-          <ion-item slot="header" 
-          style="border-bottom-color: gray;
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Sexe</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button *ngIf="connection" shape="round" id="first" class="sexe"
+                      (click)="user.sexe='false';choose($event)" disabled>F</ion-button>
+                    <ion-button *ngIf="connection" shape="round" id="second" class="sexe"
+                      (click)="user.sexe='true';choose($event)" disabled>H</ion-button>
+                    <input *ngIf="connection" type="text" name="sexe" [(ngModel)]="user.sexe" style="display:none;">
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
+
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Date de naissance</ion-label>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-input *ngIf="connection" type="text" name="date_nai" id="date_nai_text"
+                      [(ngModel)]="user.dateNai" disabled style="color:#855fa0;"></ion-input>
+                    <ion-input *ngIf="connection" type="text" name="date_nai" (click)="presentPicker()"
+                      id="date_nai_choose" [(ngModel)]="user.dateNai" style="color:black;display: none;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
+
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Adresse</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" name="address" id="address" [(ngModel)]="user.address" disabled
+                      style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
+
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Nationalité</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" type="text" name="nationalite" id="nationalite"
+                      [(ngModel)]="user.nationalite" disabled style="color:#855fa0;"></ion-input>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
+
+              </ion-list>
+            </ion-accordion>
+            <ion-accordion color="primary">
+              <ion-item slot="header" style="border-bottom-color: gray;
           border-bottom-width: thin;
           border-bottom-style: solid;" color="primary" lines="none">
-            <ion-label style="color: black;" >Infos financières</ion-label>
-          </ion-item>
-      
-          <ion-list style="--background: white;background-color: white;" slot="content" id="moneyList"  class="ion-no-padding list-accordion" color="primary">
+                <ion-label style="color: black;">Infos financières</ion-label>
+              </ion-item>
 
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Etes-vous fonctionnaire ?</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-button *ngIf="connection" shape="round" id="first" class="fonctionnaire" (click)="user.fonctionnaire=true;choose($event)" disabled >Oui</ion-button>
-                <ion-button *ngIf="connection" shape="round" id="second" class="fonctionnaire" (click)="user.fonctionnaire=false;choose($event)" disabled>Non</ion-button>
-                <input *ngIf="connection" type="text" [(ngModel)]="user.fonctionnaire" name="fonctionnaire"  style="display:none;" #fct>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+              <ion-list style="--background: white;background-color: white;" slot="content" id="moneyList"
+                class="ion-no-padding list-accordion" color="primary">
 
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">Etes-vous client ?</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-button *ngIf="connection" shape="round" id="first" class="client" (click)="user.client=true;choose($event)" disabled >Oui</ion-button>
-                <ion-button *ngIf="connection" shape="round" id="second" class="client" (click)="user.client=false;choose($event)" disabled>Non</ion-button>
-                <input *ngIf="connection" type="text" name="client" [(ngModel)]="user.client"  style="display:none;" #clt>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Etes-vous fonctionnaire ?</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button *ngIf="connection" shape="round" id="first" class="fonctionnaire"
+                      (click)="user.fonctionnaire=true;choose($event)" disabled>Oui</ion-button>
+                    <ion-button *ngIf="connection" shape="round" id="second" class="fonctionnaire"
+                      (click)="user.fonctionnaire=false;choose($event)" disabled>Non</ion-button>
+                    <input *ngIf="connection" type="text" [(ngModel)]="user.fonctionnaire" name="fonctionnaire"
+                      style="display:none;" #fct>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-            <ion-item lines="none"  color="primary">
-              <ion-col>
-                <ion-label style="color: black;opacity: 1;">salaire mensuel moyen</ion-label>
-              </ion-col>
-              <ion-col>
-                <ion-input *ngIf="connection" id="mensuel" name="mensuel" [(ngModel)]="user.mensuel" disabled style="color: #855fa0;opacity: 1;"></ion-input>
-                <ion-select *ngIf="connection" style="display: none;color: black;" id="mensuel_select" [(ngModel)]="user.mensuel" #select (ionchange)="select.value=select.arialabel" value="{{user.mensuel}}" okText="ok" cancelText="annuler">
-                  <ion-select-option value="<=7000"> &lsaquo;=7000</ion-select-option>
-                  <ion-select-option value=">7000 && <20000"> &rsaquo; 7000 et &lsaquo; 20000 </ion-select-option>
-                  <ion-select-option value=">=20000">  &rsaquo;=20000</ion-select-option>
-                </ion-select>
-                <ion-label *ngIf="!connection"> <ion-skeleton-text animated></ion-skeleton-text></ion-label>
-              </ion-col>
-            </ion-item>
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">Etes-vous client ?</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-button *ngIf="connection" shape="round" id="first" class="client"
+                      (click)="user.client=true;choose($event)" disabled>Oui</ion-button>
+                    <ion-button *ngIf="connection" shape="round" id="second" class="client"
+                      (click)="user.client=false;choose($event)" disabled>Non</ion-button>
+                    <input *ngIf="connection" type="text" name="client" [(ngModel)]="user.client" style="display:none;"
+                      #clt>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-         </ion-list>
-        </ion-accordion>
+                <ion-item lines="none" color="primary">
+                  <ion-col>
+                    <ion-label style="color: black;opacity: 1;">salaire mensuel moyen</ion-label>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input *ngIf="connection" id="mensuel" name="mensuel" [(ngModel)]="user.mensuel" disabled
+                      style="color: #855fa0;opacity: 1;"></ion-input>
+                    <ion-select *ngIf="connection" style="display: none;color: black;" id="mensuel_select"
+                      [(ngModel)]="user.mensuel" #select (ionchange)="select.value=select.arialabel"
+                      value="{{user.mensuel}}" okText="ok" cancelText="annuler">
+                      <ion-select-option value="<=7000"> &lsaquo;=7000</ion-select-option>
+                      <ion-select-option value=">7000 && <20000"> &rsaquo; 7000 et &lsaquo; 20000 </ion-select-option>
+                      <ion-select-option value=">=20000"> &rsaquo;=20000</ion-select-option>
+                    </ion-select>
+                    <ion-label *ngIf="!connection">
+                      <ion-skeleton-text animated></ion-skeleton-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
 
-      </ion-accordion-group>
-     </ion-col>
-    </ion-row>
-  </ion-grid>
+              </ion-list>
+            </ion-accordion>
 
-</ion-card>
+          </ion-accordion-group>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
 </ion-content>

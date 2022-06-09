@@ -11,18 +11,20 @@
 
 <ion-content>
   <ion-card color="primary" style="height: 96%;overflow: scroll;border-radius: 20px;">
-    <ion-grid>  
+    <ion-grid>
       <div *ngIf="message=='ok'">
         <ion-row id="firstRow" style="height:15%;">
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
               </svg>
               Votre demande de crédit a été enregistrée
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
         <ion-row>
@@ -33,10 +35,10 @@
           </ion-col>
         </ion-row>
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:45%;">
-          <a class="se" [routerLink]="['/login']" >Se Connecter</a>
-          
+          <a class="se" [routerLink]="['/login']">Se Connecter</a>
+
         </ion-fab>
-        
+
       </div>
 
       <div *ngIf="message=='ops'">
@@ -44,27 +46,30 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
-                </svg>
+                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
+              </svg>
               Vos pièces scanner et les infos saisies sont incompatibles.
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col style="margin-top: 40px;">
-            <ion-label class="lien" >
+            <ion-label class="lien">
               Veuillez rescanner vos pièces justificatives
               <br>
               <br>
               <ion-fab horizontal="end" slot="fixed">
-                <a class="sc" (click)="scanner()" >Scaner mes pièces</a>
+                <a class="sc" (click)="scanner()">Scaner mes pièces</a>
               </ion-fab>
               <ion-fab horizontal="start" slot="fixed">
                 <a class="sc" (click)="onClick()" style="float: left;cursor: pointer;">Annuler</a>
-                
+
               </ion-fab>
               <br>
               <hr>
@@ -74,25 +79,25 @@
               <br>
               <br>
               <div style=" color: black;text-shadow: #D06079 1px 0 4px;font-size: 13px;font-weight: bold;">
-                <span class="v1 icon"  id="nom" *ngIf="nom==true"> Nom ;</span><span> </span>
+                <span class="v1 icon" id="nom" *ngIf="nom==true"> Nom ;</span><span> </span>
                 <span class="v2 icon" id="prenom" *ngIf="prenom==true"> Prenom ;</span><span> </span>
                 <span class="v3 icon" id="cin" *ngIf="cin==true"> CIN ;</span><span> </span>
                 <span class="v4 icon" id="address" *ngIf="address==true"> Address ;</span><span> </span>
                 <span class="v5 icon" id="sexe" *ngIf="sexe==true"> Sexe</span>
               </div>
-              
+
             </ion-label>
           </ion-col>
         </ion-row>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="position: fixed;bottom:5%;right:7%;">
-          <a class="sc" (click)="modifier()" >Modifier</a>
+          <a class="sc" (click)="modifier()">Modifier</a>
         </ion-fab>
         <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="position: fixed;bottom:5%;left:7%;">
-          <a class="sc" (click)="ok()"  style="float: left;cursor: pointer;">OK</a>
-                
+          <a class="sc" (click)="ok()" style="float: left;cursor: pointer;">OK</a>
+
         </ion-fab>
-        
-        
+
+
       </div>
 
       <div *ngIf="message=='okUp'">
@@ -100,23 +105,25 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
               </svg>
               <br>
               Votre opération a été bien enregistrée
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="reu"  class="se" [routerLink]="['/home/credit']" >
+          <ion-fab-button color="reu" class="se" [routerLink]="['/home/credit']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
       <div *ngIf="message=='opsUp'">
@@ -124,24 +131,27 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
-                </svg>
-                <br>
+                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
+              </svg>
+              <br>
               Votre opération a été échoué.
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="ech"  class="se" [routerLink]="['/home/credit']" >
+          <ion-fab-button color="ech" class="se" [routerLink]="['/home/credit']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
 
@@ -150,24 +160,27 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
-                </svg>
-                <br>
-                Votre demande de crédit a été annuler.
+                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
+              </svg>
+              <br>
+              Votre demande de crédit a été annuler.
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="ech"  class="se" [routerLink]="['/welcome']" >
+          <ion-fab-button color="ech" class="se" [routerLink]="['/welcome']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
       <div *ngIf="message=='error'">
@@ -175,26 +188,29 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
-                </svg>
-                <br>
+                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
+              </svg>
+              <br>
               Votre opération a été échoué.
               <br>
               Veuillez vous la refaite.
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="ech"  class="se" [routerLink]="['/welcome']" >
+          <ion-fab-button color="ech" class="se" [routerLink]="['/welcome']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
       <div *ngIf="message=='okUppass'">
@@ -202,23 +218,25 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
               </svg>
               <br>
               Votre opération a été bien enregistrée
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="reu"  class="se" [routerLink]="['/login']" >
+          <ion-fab-button color="reu" class="se" [routerLink]="['/login']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
 
@@ -227,25 +245,28 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
-                </svg>
-                <br>
+                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
+              </svg>
+              <br>
               Votre opération a été échoué.
-              
+
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="ech"  class="se" [routerLink]="['/forgot-password']" >
+          <ion-fab-button color="ech" class="se" [routerLink]="['/forgot-password']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
 
@@ -256,23 +277,25 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
               </svg>
               <br>
               Votre opération a été bien envoyée
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="reu"  class="se" [routerLink]="['/home/contactus']" >
+          <ion-fab-button color="reu" class="se" [routerLink]="['/home/contactus']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
 
       <div *ngIf="message=='opscontact'">
@@ -280,24 +303,27 @@
           <ion-col>
             <ion-label>
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3"/>
-                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2"/>
-                </svg>
-                <br>
+                <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10"
+                  cx="65.1" cy="65.1" r="62.1" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="34.4" y1="37.9" x2="95.8" y2="92.3" />
+                <line class="path line" fill="none" stroke="#D06079" stroke-width="6" stroke-linecap="round"
+                  stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
+              </svg>
+              <br>
               Votre opération a été échoué.
             </ion-label>
-            
+
           </ion-col>
         </ion-row>
-        
+
         <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="position: fixed;bottom: 5%;left:50%;">
-          <ion-fab-button color="ech"  class="se" [routerLink]="['/home/contactus']" >
+          <ion-fab-button color="ech" class="se" [routerLink]="['/home/contactus']">
             <ion-label style="color: white">ok</ion-label>
           </ion-fab-button>
-          
+
         </ion-fab>
-        
+
       </div>
     </ion-grid>
   </ion-card>

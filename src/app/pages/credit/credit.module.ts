@@ -17,4 +17,4 @@ import { CreditPage } from './credit.page';
   ],
   declarations: [CreditPage]
 })
-export class CreditPageModule {}
+export class CreditPageModule { }

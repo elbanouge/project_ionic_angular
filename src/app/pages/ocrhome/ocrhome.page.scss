@@ -1,49 +1,53 @@
-ion-content{
-    ion-card{
+ion-content {
+    ion-card {
         border-radius: 20px;
         box-shadow: 2px 1px 5px 2px #c4c0d5;
     }
-    ion-grid{
+
+    ion-grid {
         // margin-top:50px;
         padding-left: 10px;
         color: black;
-        
-        #firstRow{
+
+        #firstRow {
             margin-top: 50px;
         }
-        ion-label{
+
+        ion-label {
             // font-size: large;
             font-size: 12px;
             color: black;
         }
-        h5{
+
+        h5 {
             font-family: fantasy;
             font-size: 16px;
             text-align: center;
             margin-top: 10%;
         }
-        
+
     }
-   
+
 }
 
-img{
+img {
     -webkit-box-shadow: 0px 4px 9px 3px rgb(214 219 217);
-    -moz-box-shadow: 0 4px 9px 3px rgba(214,219,217,1);
+    -moz-box-shadow: 0 4px 9px 3px rgba(214, 219, 217, 1);
     box-shadow: 0px 4px 9px 3px rgb(214 219 217);
     border: 1px solid #f5f5f5;
     border-radius: 10px;
 }
 
-.scanner h2{
+.scanner h2 {
     color: #252839;
     font-size: 20px;
     position: absolute;
     //text-align: center;
-    
+
 
 }
-.scanner h2:before{
+
+.scanner h2:before {
     //text-align: center;
     content: "Scanner mes pieces justificatives   ";
     position: absolute;
@@ -58,21 +62,26 @@ img{
     animation: scan 4s linear infinite;
 }
 
-@keyframes scan{
-    0%, 10%,100%{
+@keyframes scan {
+
+    0%,
+    10%,
+    100% {
         width: 0;
     }
-    60%,80%{
+
+    60%,
+    80% {
         width: 100%;
     }
 }
 
 @media only screen and (max-width: 335px) {
-    #listDocuments{
+    #listDocuments {
         margin-top: 45px;
     }
-    .scanner h2{
+
+    .scanner h2 {
         font-size: 19px;
     }
 }
-

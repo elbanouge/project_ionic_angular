@@ -17,4 +17,4 @@ import { DecisionPage } from './decision.page';
   ],
   declarations: [DecisionPage]
 })
-export class DecisionPageModule {}
+export class DecisionPageModule { }

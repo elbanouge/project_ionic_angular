@@ -17,4 +17,4 @@ import { VerifyOTPPage } from './verify-otp.page';
   ],
   declarations: [VerifyOTPPage]
 })
-export class VerifyOTPPageModule {}
+export class VerifyOTPPageModule { }

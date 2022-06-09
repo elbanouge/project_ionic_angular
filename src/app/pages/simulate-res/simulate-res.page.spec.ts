@@ -9,7 +9,7 @@ describe('SimulateResPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SimulateResPage ],
+      declarations: [SimulateResPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

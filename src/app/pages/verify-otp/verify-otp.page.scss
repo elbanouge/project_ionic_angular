@@ -1,21 +1,25 @@
-ion-card{
+ion-card {
     height: 97%;
     border-radius: 20px;
     box-shadow: 2px 1px 5px 2px #c4c0d5;
-    color:black ;
+    color: black;
 }
-ion-input{
-    color:black ;
+
+ion-input {
+    color: black;
     border: solid #855fa0;
 }
-h2{
+
+h2 {
     text-align: center;
     font-weight: bold;
 }
-p{
+
+p {
     text-align: center;
 }
-input{
+
+input {
     background-color: white;
     margin: 0 6px;
     text-align: center;
@@ -29,15 +33,20 @@ input{
     border-radius: 3px;
     // height: 55px;
 }
-#resend{
-    color:#855fa0 ;
+
+#resend {
+    color: #855fa0;
     text-decoration: none;
     margin-left: 5px;
 }
-#resend:hover,#resend:active,#resend:link{
+
+#resend:hover,
+#resend:active,
+#resend:link {
     text-decoration: underline;
 }
-img{
+
+img {
     width: 100%;
     border-radius: 20px;
 }

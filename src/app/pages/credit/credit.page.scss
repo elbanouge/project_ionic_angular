@@ -1,58 +1,61 @@
-ion-content{
-    ion-card{
+ion-content {
+    ion-card {
         height: 96%;
         border-radius: 20px;
         box-shadow: 2px 1px 5px 2px #c4c0d5;
     }
-    ion-grid{
+
+    ion-grid {
         // margin-top:50px;
         padding-left: 10px;
         color: black;
         margin-left: 4%;
         text-align: center;
-        
-        h1{
+
+        h1 {
             font-family: fantasy;
             font-size: xx-large;
             text-align: center;
         }
-        
-        ion-label{
+
+        ion-label {
             // font-size: large;
             font-size: 16px;
             color: black;
             text-align: center;
             //text-shadow: 1px 1px 2px #855fa0;
             text-shadow: #855fa0 1px 0 4px;
-            
-        }
-        ion-label.list{
-            font-size: 10px;
-            text-transform: lowercase;
-            text-shadow:none;
+
         }
 
-        h5{
+        ion-label.list {
+            font-size: 10px;
+            text-transform: lowercase;
+            text-shadow: none;
+        }
+
+        h5 {
             font-family: fantasy;
             font-size: 16px;
             text-align: center;
         }
+
         ion-icon {
             --ionicon-stroke-width: 30px;
             font-size: 30px;
-          }
-        
+        }
+
     }
-   
+
 }
 
 //.button {--background-hover: blue}
 //.button:hover {--background-hover: blue}
-.my-button:hover{
+.my-button:hover {
     background-color: orange !important;
 }
 
-.icon{
+.icon {
     --ionicon-stroke-width: 30px;
     display: inline-block;
     font-size: 20px;
@@ -63,33 +66,44 @@ ion-button ion-icon {
     font-size: 200%;
 }
 
-.create{
+.create {
     animation-delay: 1s;
 }
-.close{
+
+.close {
     animation-delay: 2s;
 }
 
-.etat{
+.etat {
     animation-delay: 3s;
 }
 
 
 
-@keyframes float{
-    0%{transform: translateY(0);}
-    50%{transform: translateY(-10px);}
-    100%{transform: translateY(0);}
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
-ion-item{
-    --background:white;
+ion-item {
+    --background: white;
 }
-.list-accordion{
+
+.list-accordion {
     background-color: white;
-    
+
 }
-.list-accordion > ion-item{
+
+.list-accordion>ion-item {
     border-bottom-color: #48064aa3;
     border-bottom-style: solid;
     border-bottom-width: thin;
@@ -97,14 +111,15 @@ ion-item{
     margin-right: 10px;
 }
 
-.cssClass{
+.cssClass {
     ion-icon {
         color: blue;
-      }
+    }
 
 
 }
-#edit{
+
+#edit {
     font-size: 170%;
     float: right;
     cursor: pointer;
@@ -112,17 +127,13 @@ ion-item{
 
 
 @media only screen and (max-height: 610px) {
-    #first{
+    #first {
         margin-top: 50px !important;
     }
 }
 
 @media only screen and (max-height: 580px) {
-    #first{
+    #first {
         margin-top: 40px !important;
     }
 }
-
-
-
-

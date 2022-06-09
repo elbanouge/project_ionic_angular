@@ -9,7 +9,7 @@ describe('OcrhomePage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OcrhomePage ],
+      declarations: [OcrhomePage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

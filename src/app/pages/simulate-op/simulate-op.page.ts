@@ -45,14 +45,14 @@ export class SimulateOpPage implements OnInit {
     this.simulationService.calculMensualite(this.credit).subscribe(data => {
       localStorage.setItem('currentCredit', JSON.stringify(data));
       this.credit = data;
-      var temp: string;
-      if (this.credit.minMensualite > this.credit.maxMensualite) {
-        temp = this.credit.minMensualite;
-        this.credit.minMensualite = this.credit.maxMensualite;
-        this.credit.maxMensualite = temp;
-      }
-      document.getElementById("mensualite").setAttribute("min", this.credit.minMensualite);
-      document.getElementById("mensualite").setAttribute("max", this.credit.maxMensualite);
+      // var temp: string;
+      // if (this.credit.minMensualite > this.credit.maxMensualite) {
+      //   temp = this.credit.minMensualite;
+      //   this.credit.minMensualite = this.credit.maxMensualite;
+      //   this.credit.maxMensualite = temp;
+      // }
+      // document.getElementById("mensualite").setAttribute("min", this.credit.minMensualite);
+      // document.getElementById("mensualite").setAttribute("max", this.credit.maxMensualite);
     }, err => { });
   }
 
@@ -60,24 +60,30 @@ export class SimulateOpPage implements OnInit {
     this.simulationService.calculMensualite(this.credit).subscribe(data => {
       localStorage.setItem('currentCredit', JSON.stringify(data));
       this.credit = data;
-      var temp: string;
-      if (this.credit.minMensualite > this.credit.maxMensualite) {
-        temp = this.credit.minMensualite;
-        this.credit.minMensualite = this.credit.maxMensualite;
-        this.credit.maxMensualite = temp;
-      }
-      document.getElementById("mensualite").setAttribute("min", this.credit.minMensualite);
-      document.getElementById("mensualite").setAttribute("max", this.credit.maxMensualite);
+      // var temp: string;
+      // if (this.credit.minMensualite > this.credit.maxMensualite) {
+      //   temp = this.credit.minMensualite;
+      //   this.credit.minMensualite = this.credit.maxMensualite;
+      //   this.credit.maxMensualite = temp;
+      // }
+      // document.getElementById("mensualite").setAttribute("min", this.credit.minMensualite);
+      // document.getElementById("mensualite").setAttribute("max", this.credit.maxMensualite);
     }, err => { });
   }
 
+  newCredit: Credit = new Credit();
   MensualiteNgModelChange(value) {
-    this.credit = JSON.parse(localStorage.getItem('credit'));
-    this.credit.mensualite = value;
-    console.log(this.credit);
-    this.simulationService.calculDuree(this.credit).subscribe(data => {
+    console.log(value);
+    this.credit = JSON.parse(localStorage.getItem('currentCredit'));
+
+    this.newCredit.capital = this.credit.capital;
+    this.newCredit.taux = this.credit.taux;
+    this.newCredit.mensualite = value;
+
+    this.simulationService.calculDuree(this.newCredit).subscribe(data => {
+      console.log(data);
       localStorage.setItem('currentCredit', JSON.stringify(data));
-      this.credit = data;
+      this.newCredit = data;
     }, err => { });
   }
 

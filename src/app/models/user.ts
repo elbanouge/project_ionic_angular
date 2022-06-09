@@ -13,6 +13,7 @@ export class User {
     public sexe: string;
     public date_naissance: string;
     public lieu_naissance: string;
+    public date_validite_cin: string;
     public nationalite: string;
     public client: string;
     public fonctionnaire: string;

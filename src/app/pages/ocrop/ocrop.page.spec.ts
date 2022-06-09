@@ -9,7 +9,7 @@ describe('OcropPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ OcropPage ],
+      declarations: [OcropPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

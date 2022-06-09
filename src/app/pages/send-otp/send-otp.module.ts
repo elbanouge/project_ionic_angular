@@ -17,4 +17,4 @@ import { SendOTPPage } from './send-otp.page';
   ],
   declarations: [SendOTPPage]
 })
-export class SendOTPPageModule {}
+export class SendOTPPageModule { }

@@ -18,4 +18,4 @@ import { SetpasswordPage } from './setpassword.page';
   ],
   declarations: [SetpasswordPage]
 })
-export class SetpasswordPageModule {}
+export class SetpasswordPageModule { }

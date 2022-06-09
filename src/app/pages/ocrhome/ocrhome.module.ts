@@ -17,4 +17,4 @@ import { OcrhomePage } from './ocrhome.page';
   ],
   declarations: [OcrhomePage]
 })
-export class OcrhomePageModule {}
+export class OcrhomePageModule { }

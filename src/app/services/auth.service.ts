@@ -27,7 +27,7 @@ export class AuthService {
 
   login(user: User): Observable<any> {
     // this.userEmail.email=user.email;
-    return this.http.post(API_URL + 'login', JSON.stringify(user),
+    return this.http.post(API_URL + 'login_app', JSON.stringify(user),
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } }).pipe(catchError(this.handleError));
   }
 
@@ -54,8 +54,11 @@ export class AuthService {
       user.sexe = "false";
     }
 
+    user.date_validite_cin = user.date_naissance;
+    user.lieu_naissance = user.address.trim();
     user.username = user.email.split("@")[0].trim();
     user.password = user.lastName.toLocaleLowerCase().trim();
+    localStorage.setItem('currentPassword', JSON.stringify(user.password));
 
     return this.http.post(API_URL + 'registration', JSON.stringify(user),
       { headers: { "Content-Type": "application/json; charset=UTF-8" } });
@@ -85,7 +88,7 @@ export class AuthService {
   }
 
   findByEmailpost(email: string): Observable<any> {
-    return this.http.post(API_URL + 'findByEmail/' + email,
+    return this.http.get(API_URL + 'findByEmail/' + email,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
 

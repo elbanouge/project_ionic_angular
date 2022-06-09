@@ -6,13 +6,17 @@ import { User } from '../models/user';
     providedIn: 'root'
 })
 export class LoadService {
-    public currentUser: User = null;
+    public currentUser: User = new User();
     public password: string;
 
     constructor() { }
 
     public loadCredit(): Credit {
         return JSON.parse(localStorage.getItem('currentCredit'));
+    }
+
+    public loadUser(): User {
+        return JSON.parse(localStorage.getItem('currentUser'));
     }
 
     public loadUsernameUser(): string {
@@ -23,9 +27,5 @@ export class LoadService {
     public loadPasswordUser(): string {
         this.password = localStorage.getItem('currentPassword');
         return this.password;
-    }
-
-    public loadUser(): User {
-        return JSON.parse(localStorage.getItem('currentUser'));
     }
 }

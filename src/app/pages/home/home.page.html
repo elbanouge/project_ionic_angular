@@ -1,20 +1,18 @@
-
-
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="primary" style="border-top: solid #855fa0 1px;--border:unset;">
 
-      <ion-tab-button tab="credit" >
+      <ion-tab-button tab="credit">
         <ion-icon name="cash" color="secondary" (click)="refresh()"></ion-icon>
         <!-- <ion-label>Crédit</ion-label> -->
         <ion-badge color="dark" style="color: white;">{{count}}</ion-badge>
       </ion-tab-button>
-  
+
       <ion-tab-button tab="profile">
         <ion-icon name="person" color="secondary" (click)="refresh()"></ion-icon>
         <!-- <ion-label>Profil</ion-label> -->
       </ion-tab-button>
-  
+
       <ion-tab-button tab="contactus">
         <ion-icon name="chatbox-ellipses-sharp" color="secondary" (click)="refresh()"></ion-icon>
         <!-- <ion-label>Paramètres Générales</ion-label> -->

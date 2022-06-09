@@ -9,7 +9,6 @@ import { CreditService } from 'src/app/services/credit.service';
 import { Credit } from 'src/app/models/credit';
 import { CamundaBPMService } from 'src/app/services/camunda-bpm.service';
 import { Camunda } from 'src/app/models/camunda';
-import { th } from 'date-fns/locale';
 import { SimulationService } from 'src/app/services/simulation.service';
 import { LoadService } from 'src/app/services/load.service';
 
@@ -37,7 +36,7 @@ export class PersonalinfosPage implements OnInit {
   sliderConfig = {
 
   }
-  credit: Credit;
+  credit: Credit = new Credit();
   userModel: User = new User();
   camundaModel: Camunda;
   constructor(public formBuilder: FormBuilder,
@@ -47,10 +46,8 @@ export class PersonalinfosPage implements OnInit {
     private authServices: AuthService,
     private creditservice: CreditService,
     private loadService: LoadService,
-    private simulationService: SimulationService,
     public toastController: ToastController) {
-    this.credit = simulationService.getResult();
-
+    this.credit = this.loadService.loadCredit();
   }
 
   ngOnInit() {
@@ -107,21 +104,16 @@ export class PersonalinfosPage implements OnInit {
               obtenirEnvoyerLabel.style.display = "none";
               spinner.style.display = "block";
               this.authServices.registration(this.userModel).subscribe(data => {
-                //this.authServices.findByEmailpost(this.userModel.email).subscribe(data =>{
-                //alert("ok");
-                // this.credit.user = this.userModel;
+                this.userModel = data;
                 localStorage.setItem('currentUser', JSON.stringify(this.userModel));
-                this.creditservice.addCredit(this.credit, this.userModel.email).subscribe(data => {
+                this.creditservice.addCredit(this.credit).subscribe(data => {
                   this.credit = data
                   this.camudaservice.startProcess(this.userModel).subscribe(
-                    res => { this.router.navigateByUrl("send-otp"); },
-                    fal => { }
+                    data => { this.router.navigateByUrl("send-otp"); },
+                    err => { }
                   );
-
-
                 }, err => { });
 
-                // },err =>{});
               }, err => {
                 this.errorMessageMail = "Email est déjà exist";
                 spinner.style.display = "none";

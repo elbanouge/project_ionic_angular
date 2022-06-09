@@ -9,7 +9,7 @@ describe('VerifyOTPPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ VerifyOTPPage ],
+      declarations: [VerifyOTPPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

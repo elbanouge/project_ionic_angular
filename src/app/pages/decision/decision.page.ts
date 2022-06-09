@@ -80,26 +80,31 @@ export class DecisionPage implements OnInit {
       //this.c.user.scanners=this.c.user.scanners;
       //alert(this.c.user.scanners.id);
       //alert(data);
-      this.creditservice.delete(this.c.id).subscribe(
-        ass => {
-          this.id = Number(this.c.user.id);
-          this.auth.deletebyid(this.id).subscribe(data => {
 
-            if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-            localStorage.setItem("url", "annuler");
-            this.router.navigateByUrl('decision');
-            this.message = localStorage.getItem("url");
-            //this.router.navigateByUrl('decision/annuler');
+      localStorage.setItem("url", "annuler");
+      this.router.navigateByUrl('decision');
+      this.message = localStorage.getItem("url");
 
-          }, err => {
-            if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-            localStorage.setItem("url", "annuler");
-            this.router.navigateByUrl('decision');
-            this.message = localStorage.getItem("url");
-          });
-        },
-        lay => { }
-      )
+      // this.creditservice.delete(this.c.id).subscribe(
+      //   ass => {
+      //     this.id = Number(this.c.user.id);
+      //     this.auth.deletebyid(this.id).subscribe(data => {
+
+      //       if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+      //       localStorage.setItem("url", "annuler");
+      //       this.router.navigateByUrl('decision');
+      //       this.message = localStorage.getItem("url");
+      //       //this.router.navigateByUrl('decision/annuler');
+
+      //     }, err => {
+      //       if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+      //       localStorage.setItem("url", "annuler");
+      //       this.router.navigateByUrl('decision');
+      //       this.message = localStorage.getItem("url");
+      //     });
+      //   },
+      //   lay => { }
+      // )
     }, err => {
 
     }
@@ -112,18 +117,18 @@ export class DecisionPage implements OnInit {
     this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(layla => {
 
       this.c = layla;
-      this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
-        lay => {
-          this.c = lay;
-          this.camundaservices.completeTaskScanDocs(90, this.c.taskId, this.c.id).subscribe(
-            a => {
-              this.sendEmail();
-            },
-            l => { }
-          )
-        },
-        ass => { }
-      )
+      // this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
+      //   lay => {
+      //     this.c = lay;
+      //     this.camundaservices.completeTaskScanDocs(90, this.c.taskId, this.c.id).subscribe(
+      //       a => {
+      //         this.sendEmail();
+      //       },
+      //       l => { }
+      //     )
+      //   },
+      //   ass => { }
+      // )
       //
 
     },
@@ -135,18 +140,20 @@ export class DecisionPage implements OnInit {
     this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(layla => {
 
       this.c = layla;
-      this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
-        lay => {
-          this.c = lay;
-          this.camundaservices.completeTaskScanDocs(90, this.c.taskId, this.c.id).subscribe(
-            a => {
-              this.router.navigateByUrl('/login');
-            },
-            l => { }
-          )
-        },
-        ass => { }
-      )
+      this.router.navigateByUrl('/login');
+
+      // this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
+      //   lay => {
+      //     this.c = lay;
+      //     this.camundaservices.completeTaskScanDocs(90, this.c.taskId, this.c.id).subscribe(
+      //       a => {
+      //         this.router.navigateByUrl('/login');
+      //       },
+      //       l => { }
+      //     )
+      //   },
+      //   ass => { }
+      // )
       //
 
     },
@@ -159,12 +166,14 @@ export class DecisionPage implements OnInit {
     this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(layla => {
 
       this.c = layla;
-      this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
-        lay => {
-          this.router.navigateByUrl('ocrhome');
-        },
-        ass => { }
-      )
+      this.router.navigateByUrl('ocrhome');
+
+      // this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
+      //   lay => {
+      //     this.router.navigateByUrl('ocrhome');
+      //   },
+      //   ass => { }
+      // )
     },
       assia => { })
   }

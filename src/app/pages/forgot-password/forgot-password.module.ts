@@ -17,4 +17,4 @@ import { ForgotPasswordPage } from './forgot-password.page';
   ],
   declarations: [ForgotPasswordPage]
 })
-export class ForgotPasswordPageModule {}
+export class ForgotPasswordPageModule { }
