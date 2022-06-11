@@ -109,7 +109,11 @@ export class PersonalinfosPage implements OnInit {
                 this.creditservice.addCredit(this.credit).subscribe(data => {
                   this.credit = data
                   this.camudaservice.startProcess(this.userModel).subscribe(
-                    data => { this.router.navigateByUrl("send-otp"); },
+                    data => {
+                      this.credit.processInstanceId = data.id;
+                      localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                      this.router.navigateByUrl("send-otp");
+                    },
                     err => { }
                   );
                 }, err => { });

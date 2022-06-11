@@ -1,3 +1,4 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActionSheetController, ToastController } from '@ionic/angular';
@@ -15,28 +16,29 @@ import { CreditService } from 'src/app/services/credit.service';
 })
 export class CreditPage implements OnInit {
 
-  private credit: Credit[] = [];
+  public credits: Credit[] = [];
   private camuda: Camunda;
+  successResponse: string;
 
   constructor(private router: Router,
     private camundaservice: CamundaBPMService,
     public actionSheetController: ActionSheetController,
     private creditservice: CreditService,
     private authservice: AuthService,
-    public toastController: ToastController) { }
+    public toastController: ToastController) {
+  }
 
   async ngOnInit() {
-    this.creditservice.getByemail(this.authservice.getUser().email).subscribe(data => {
-      this.credit = data;
-    }, err => { });
+    this.refresh();
   }
 
   logout() {
     this.authservice.logout();
   }
   refresh() {
-    this.creditservice.getByemail(this.authservice.getUser().email).subscribe(data => {
-      this.credit = data;
+    this.creditservice.getCreditsByUser(this.authservice.getUser().email).subscribe(data => {
+      localStorage.setItem("credits", JSON.stringify(data));
+      this.credits = data;
     }, err => { });
   }
 
@@ -51,7 +53,7 @@ export class CreditPage implements OnInit {
 
   public async showActionSheet(c: Credit) {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Voulez-vous vraiment modifier le crédit ' + c.creditdate + " du capital " + c.capital + " DH",
+      header: 'Voulez-vous vraiment modifier le crédit ' + c.date + " du capital " + c.capital + " DH",
       cssClass: 'aas',
       buttons: [{
         text: 'Modifier',
@@ -77,7 +79,7 @@ export class CreditPage implements OnInit {
 
   public async delete(c: Credit) {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Voulez-vous vraiment supprimer e crédit ' + c.creditdate + " du capital " + c.capital + " DH",
+      header: 'Voulez-vous vraiment supprimer e crédit ' + c.date + " du capital " + c.capital + " DH",
       cssClass: 'aas',
       buttons: [{
         text: 'Supprimer',
@@ -87,19 +89,19 @@ export class CreditPage implements OnInit {
         handler: () => {
           this.creditservice.delete(c.id).subscribe(data => {
             this.presentToast('Suppression effectuée.', 'success');
-            // if(localStorage.getItem("url")!=null) localStorage.removeItem("url");
-            //   localStorage.setItem("url","okUp");
-            //   this.router.navigateByUrl('decision');
-            //this.router.navigate(["/decision/okUp"]);
-            this.creditservice.getByemail(this.authservice.getUser().email).subscribe(data => {
-              this.credit = data;
+            // if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+            // localStorage.setItem("url", "okUp");
+            // this.router.navigateByUrl('decision');
+            // this.router.navigate(["/decision/okUp"]);
+            this.creditservice.getCreditsByUser(this.authservice.getUser().email).subscribe(data => {
+              this.credits = data;
             }, err => { });
           }, err => {
             this.presentToast('Suppression échouée.', 'danger');
-            // if(localStorage.getItem("url")!=null) localStorage.removeItem("url");
-            //   localStorage.setItem("url","opsUp");
-            //   this.router.navigateByUrl('decision');
-            //this.router.navigate(["/decision/opsUp"]);
+            // if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+            // localStorage.setItem("url", "opsUp");
+            // this.router.navigateByUrl('decision');
+            // this.router.navigate(["/decision/opsUp"]);
           });
         }
       }, {
@@ -118,7 +120,7 @@ export class CreditPage implements OnInit {
 
   public async status(c: Credit) {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Voulez-vous vraiment voir l\'état du crédit ' + c.creditdate + " du capital " + c.capital + " DH",
+      header: 'Voulez-vous vraiment voir l\'état du crédit ' + c.date + " du capital " + c.capital + " DH",
       cssClass: 'aas',
       buttons: [{
         text: 'ok',
@@ -126,12 +128,11 @@ export class CreditPage implements OnInit {
         icon: 'checkmark',
         cssClass: 'cssClass',
         handler: () => {
+          console.log(c.processInstanceId);
           this.camundaservice.getTaskId(c.user.id, c.processInstanceId).subscribe(
             data => {
-              c = data;
-              //alert(c.user.taskName);
-              this.etat(c.taskName);
-
+              console.log(data);
+              this.etat(data.split(" : ")[1]);
             },
             err => { }
           )

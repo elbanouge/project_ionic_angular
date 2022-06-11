@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Credit } from 'src/app/models/credit';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { CamundaBPMService } from 'src/app/services/camunda-bpm.service';
 import { CreditService } from 'src/app/services/credit.service';
@@ -17,10 +18,13 @@ export class SimulateResPage implements OnInit {
   new: any;
   updateres: any;
   path: string;
+  userModel: User;
 
   constructor(private auth: AuthService,
     public camudaservice: CamundaBPMService,
-    private creditService: CreditService, private simulationService: SimulationService, private router: Router, private loadService: LoadService) {
+    private creditService: CreditService, private simulationService: SimulationService,
+    private router: Router, private loadService: LoadService,
+    private creditservice: CreditService, private authservice: AuthService) {
     this.credit = this.simulationService.getResult();
   }
 
@@ -39,42 +43,79 @@ export class SimulateResPage implements OnInit {
 
   add() {
     this.auth.findByEmailpost(this.loadService.loadUser().email).subscribe(data => {
-      this.credit.user = data;
-      let username = this.credit.user.email.split('@')[0];
-      this.creditService.add(this.credit, username).subscribe(data => {
-        this.credit = data
+      this.userModel = data.body;
+      this.credit = this.loadService.loadCredit();
+      this.creditService.add(this.credit, this.userModel.email).subscribe(data => {
+        this.credit = data;
+        localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+
         this.camudaservice.startProcess(this.credit.user).subscribe(
-          res => {
-            this.credit = res;
-            //alert(this.credit.taskId);
-            this.camudaservice.completeTaskOTP(this.credit.user, this.credit.taskId).subscribe(
-              h => {
-                //alert("ok otp");
-                this.credit = h;
-                this.camudaservice.completeTaskScanDocs(90, this.credit.taskId, this.credit.id).subscribe(
-                  g => {
-                    //alert("ok ocr");
-                    if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-                    localStorage.setItem("url", "okUp");
-                    this.router.navigateByUrl('decision');
-                    //this.router.navigate(["/decision/okUp"]);
+          data => {
+            console.log(data.id);
+            this.credit.processInstanceId = data.id;
+            localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+            this.camudaservice.getTaskId(this.userModel.id, this.credit.processInstanceId).subscribe(
+              data => {
+                this.credit.taskId = data.split(' : ')[0];
+                this.credit.taskName = data.split(' : ')[1];
+                localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+
+                // this.credit.user.otp = this.loadService.loadOtpUser();
+                // this.credit.user.password = this.loadService.loadPasswordUser();
+                this.camudaservice.completeTaskOTP(this.credit.user, this.credit.taskId).subscribe(
+                  data => {
+                    this.camudaservice.getTaskId(this.userModel.id, this.credit.processInstanceId).subscribe(
+                      data => {
+                        this.credit.taskId = data.split(' : ')[0];
+                        this.credit.taskName = data.split(' : ')[1];
+                        localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+
+                        this.camudaservice.completeTaskScanDocs(this.credit.taskId, 80).subscribe(
+                          data => {
+                            this.camudaservice.getTaskId(this.userModel.id, this.credit.processInstanceId).subscribe(
+                              data => {
+                                this.credit.taskId = data.split(' : ')[0];
+                                this.credit.taskName = data.split(' : ')[1];
+                                localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+
+                                this.creditservice.getCreditsByUser(this.authservice.getUser().email).subscribe(data => {
+                                  localStorage.setItem("credits", JSON.stringify(data));
+                                  if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                                  localStorage.setItem("url", "okUp");
+                                  this.router.navigateByUrl('decision');
+                                  this.router.navigate(["/decision/okUp"]);
+                                }, err => { });
+                              }
+                            );
+                          },
+                          error => {
+                            console.log(error);
+                          }
+                        )
+                      }
+                    );
                   },
-                  gg => { }//console.error(gg)}
+                  error => {
+                    console.log(error);
+                  }
                 )
-              },
-              he => { }
-            )
+              }
+            );
           },
-          fal => { }
+          error => {
+            console.log(error);
+          }
         );
 
-      }, err => {
+      }, error => {
         if (localStorage.getItem("url") != null) localStorage.removeItem("url");
         localStorage.setItem("url", "opsUp");
         this.router.navigateByUrl('decision');
-        //this.router.navigate(["/decision/opsUp"]);
+        this.router.navigate(["/decision/opsUp"]);
       })
-    }, err => { })
+    }, error => {
+      console.log(error);
+    })
   }
 
   update() {

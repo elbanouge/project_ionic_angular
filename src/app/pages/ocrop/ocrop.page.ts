@@ -11,6 +11,8 @@ import { Credit } from 'src/app/models/credit';
 import { User } from 'src/app/models/user';
 import { CamundaBPMService } from 'src/app/services/camunda-bpm.service';
 import { LoadService } from 'src/app/services/load.service';
+import { ScannerService } from 'src/app/services/scanner.service';
+import { OCR } from 'src/app/models/ocr';
 
 @Component({
   selector: 'app-ocrop',
@@ -25,10 +27,16 @@ export class OcropPage implements OnInit {
   d: string;
   error: string = "assia;";
   userModel: User = new User();
+  ocrR: OCR = new OCR();
+  ocrV: OCR = new OCR();
+
+  resR: string;
+  resV: string;
 
   constructor(private router: Router,
     private loadService: LoadService,
-    private camundaservice: CamundaBPMService,
+    private camundaService: CamundaBPMService,
+    private scannerService: ScannerService,
     public authService: AuthService,
     public creditservice: CreditService,
     public navCtrl: NavController,
@@ -140,238 +148,186 @@ export class OcropPage implements OnInit {
   ok3: boolean = false;
   ok4: boolean = false;
   ok5: boolean = false;
-  async valider() {//this.authService.getUser().email;
+  async valider() {
 
     if (this.buttonhasCli == true && this.buttonhasCli2 == true) {
-      /** CNIE recto*/
+
       let spinner = document.getElementById('spinner');
       document.getElementById("sendButton").setAttribute("disabled", "true");
       let obtenirOtpLabel = document.getElementById('obtenirOtpLabel');
       obtenirOtpLabel.style.display = "none";
       spinner.style.display = "block";
+
+      /** CNIE recto **/
       var url1 = document.getElementById('url1');
       const response1 = await fetch(url1.textContent);
       const blob1 = await response1.blob();
 
-      /** CNIE verso*/
+      /** CNIE verso **/
       var url2 = document.getElementById('url2');
       const response2 = await fetch(url2.textContent);
       const blob2 = await response2.blob();
+
       if (this.buttonhasCli2 == true && this.buttonhasCli == true) {
         this.authService.findByEmailpost(this.loadService.loadUser().email).subscribe(d => {
           localStorage.setItem('currentUser', JSON.stringify(d.body));
           console.log(this.loadService.loadUser());
           this.userModel = this.loadService.loadUser();
-          /** CNIE recto*/
 
+          /** CNIE recto **/
           const formData = new FormData();
-          formData.append('file', blob1, this.userModel.email + "_CNIErecto.png");
+          formData.append('file', blob1, this.userModel.email + "_CNIERecto.png");
           formData.append('lang', 'fra');
-          formData.append('id_user', '19');
+          formData.append('id_user', this.userModel.id);
           this.photoService.postData(formData).subscribe(
-            (data) => {
-            },
-            (error) => {
-            }
-          );
+            data => {
 
-          /** CNIE verso*/
-
-          const formData2 = new FormData();
-          formData2.append('file', blob2, this.userModel.email + "_CNIEverso.png");
-          formData2.append('lang', 'fra');
-          formData2.append('id_user', '19');
-          this.photo2Service.postData2(formData2).subscribe(
-            (data) => {
-              this.d = data;
-              //alert(this.d);
-              //this.table=this.d;
-              // if (this.d.indexOf(("CIN user and CIN OCR are the same")) != -1) {
-              //   //this.sendEmail();
-              //   //alert("CIN user and CIN OCR are ok");
-              //   this.ok1 = true;
-              // } else if (this.d.indexOf("CIN user and CIN OCR are diferent") != -1) {
-              //   this.error += "CIN;";
-              //   //alert("CIN user and CIN OCR are diferent");
-              //   this.ok1 = false;
-              // }
-
-              // if (this.d.indexOf(("Nom user and Nom OCR are the same")) != -1) {
-              //   //this.sendEmail();
-              //   //alert("Nom user and Nom OCR  are ok");
-              //   this.ok2 = true;
-              // } else if (this.d.indexOf("Nom user and Nom OCR  are different") != -1) {
-              //   this.error += "Nom;";
-              //   //alert("Nom user and Nom OCR  are different");
-              //   this.ok2 = false;
-              // }
-
-              // if (this.d.indexOf(("Prenom user and Prenom OCR are the same")) != -1) {
-              //   //this.sendEmail();
-              //   //alert("Prenom user and Prenom OCR are ok");
-              //   this.ok3 = true;
-              // } else if (this.d.indexOf("Prenom user and Prenom OCR are different") != -1) {
-              //   this.error += "Prenom;";
-              //   //alert("Prenom user and Prenom OCR are different");
-              //   this.ok3 = false;
-              // }
-
-              // if (this.d.indexOf(("Adresse user and Adresse OCR are the same")) != -1) {
-              //   //this.sendEmail();
-              //   this.ok4 = true;
-              //   //alert("Adresse user and Adresse OCR are ok");
-              // } else if (this.d.indexOf("Adresse user and Adresse OCR are different") != -1) {
-              //   this.error += "Adresse;";
-              //   this.ok4 = false;
-              //   //alert("Adresse user and Adresse OCR are different");
-              // }
-
-              // if (this.d.indexOf(("Sexe user and Sexe OCR are the same")) != -1) {
-              //   this.ok5 = true;
-              //   //alert("Sexe user and Sexe OCR ok");
-              // } else if (this.d.indexOf("Sexe user and Sexe OCR are different") != -1) {
-              //   this.error += "Sexe;";
-              //   this.ok5 = false;
-              //   //alert("Sexe user and Sexe OCR are different");
-              // }
-              // alert(this.ok1);
-              // alert(this.ok2);
-              // alert(this.ok3);
-              // alert(this.ok4);
-              // alert(this.ok5);
-
-              this.ok1 = true;
-              this.ok2 = true;
-              this.ok3 = true;
-              this.ok4 = true;
-              this.ok5 = true;
-
-
-
-
-              if (this.ok1 == true &&
-                this.ok2 == true &&
-                this.ok3 == true &&
-                this.ok4 == true &&
-                this.ok5 == true) {
-                this.creditservice.getCreditByUser(this.userModel.email).subscribe(data => {
-
-                  this.credit = data;
-                  // this.camundaservice.completeTaskScanDocs(90, this.credit.taskId, this.credit.id).subscribe(
-                  // a => {
+              /** CNIE verso **/
+              const formData2 = new FormData();
+              formData2.append('file', blob2, this.userModel.email + "_CNIEVerso.png");
+              formData2.append('lang', 'fra');
+              formData2.append('id_user', this.userModel.id);
+              this.photo2Service.postData2(formData2).subscribe(
+                data => {
+                  this.credit = this.loadService.loadCredit();
                   this.email.email = this.userModel.email;
                   this.email.subject = "Mon Credit";
-                  if (this.userModel.sexe == 'femme') {
-                    this.email.message = "Bonjour Madame " + this.userModel.lastName.toUpperCase() + " " + this.userModel.firstName.toUpperCase() + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): " + this.credit.capital + " DH\n\tDurée (mois): " + this.credit.duree + " mois.\n\tMensualité (DH/mois): " + this.credit.mensualite + " DH/mois.\n\n Cordialement.";
+
+                  if (this.userModel.sexe == 'false') { // Si c'est une femme
+                    this.email.message = "Bonjour Madame " +
+                      this.userModel.lastName.toUpperCase() + " "
+                      + this.userModel.firstName.toUpperCase()
+                      + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): "
+                      + this.credit.capital + " DH\n\tDurée (mois): "
+                      + this.credit.duree + " mois.\n\tMensualité (DH/mois): "
+                      + this.credit.mensualite + " DH/mois.\n\n Cordialement.";
                   }
-                  else {  //Monsieur
-                    this.email.message = "Bonjour Monsieur " + this.userModel.lastName.toUpperCase() + " " + this.userModel.firstName.toUpperCase() + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): " + this.credit.capital + " DH\n\tDurée (mois): " + this.credit.duree + " mois.\n\tMensualité (DH/mois): " + this.credit.mensualite + " DH/mois.\n\n Cordialement.";
+                  else {  // Si c'est un homme
+                    this.email.message = "Bonjour Monsieur " + this.userModel.lastName.toUpperCase()
+                      + " " + this.userModel.firstName.toUpperCase()
+                      + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): "
+                      + this.credit.capital + " DH\n\tDurée (mois): " + this.credit.duree
+                      + " mois.\n\tMensualité (DH/mois): " + this.credit.mensualite
+                      + " DH/mois.\n\n Cordialement.";
                   }
-                  this.authService.sendEmail(this.email).subscribe(res => {
-                    if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-                    localStorage.setItem("url", "ok");
-                    this.router.navigateByUrl('decision');
-                    //this.router.navigate(['/decision/ok']);
+                  this.ocrR.image = './src/main/resources/images/' + this.userModel.email + '_CNIERecto.png';
+                  this.ocrR.id_user = this.userModel.id;
 
-                  }, error => {
-                    if (error.status == 200) {
-                      if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-                      localStorage.setItem("url", "ok");
-                      this.router.navigateByUrl('decision');
+                  this.ocrV.image = './src/main/resources/images/' + this.userModel.email + '_CNIEVerso.png';
+                  this.ocrV.id_user = this.userModel.id;
+
+                  this.scannerService.scanCINRecto(this.ocrR).subscribe(
+                    data => {
+                      this.resR = data;
+                      this.scannerService.scanCINVerso(this.ocrV).subscribe(
+                        data => {
+                          this.resV = data;
+                          if (this.resV != null && this.resR != null) {
+                            if (!this.resV.includes("Info OCR and user are different")) {
+                              if (!this.resR.includes("Info OCR and user are different")) {
+                                this.authService.sendEmail(this.email).subscribe(
+                                  data => {
+                                    this.camundaService.completeTaskScanDocs(this.credit.taskId, 80).subscribe(
+                                      data => {
+                                        this.camundaService.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                                          data => {
+                                            this.credit.taskId = data.split(" : ")[0];
+                                            this.credit.taskName = data.split(" : ")[1];
+                                            localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                                            if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                                            localStorage.setItem("url", "ok");
+                                            this.router.navigateByUrl('decision');
+                                          });
+                                      }, error => {
+                                        console.log(error);
+                                      }
+                                    );
+                                  },
+                                  error => {
+                                    if (error.status == 200) {
+                                      this.camundaService.completeTaskScanDocs(this.credit.taskId, 80).subscribe(
+                                        data => {
+                                          this.camundaService.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                                            data => {
+                                              this.credit.taskId = data.split(" : ")[0];
+                                              this.credit.taskName = data.split(" : ")[1];
+                                              localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                                              if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                                              localStorage.setItem("url", "ok");
+                                              this.router.navigateByUrl('decision');
+                                            });
+                                        }, error => {
+                                          console.log(error);
+                                        }
+                                      );
+                                    }
+                                  });
+                              } else {
+                                this.camundaService.completeTaskScanDocs(this.credit.taskId, 40).subscribe(
+                                  data => {
+                                    this.camundaService.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                                      data => {
+                                        this.credit.taskId = data.split(" : ")[0];
+                                        this.credit.taskName = data.split(" : ")[1];
+                                        localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                                        if (localStorage.getItem('errorOCR'))
+                                          localStorage.removeItem('errorOCR');
+                                        localStorage.setItem('errorOCR', this.error);
+                                        if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                                        localStorage.setItem("url", "ops");
+                                        this.router.navigateByUrl('decision');
+                                      });
+                                  }, error => {
+                                    console.log(error);
+                                  }
+                                );
+                              }
+                            } else {
+                              this.camundaService.completeTaskScanDocs(this.credit.taskId, 40).subscribe(
+                                data => {
+                                  this.camundaService.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                                    data => {
+                                      this.credit.taskId = data.split(" : ")[0];
+                                      this.credit.taskName = data.split(" : ")[1];
+                                      localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                                      if (localStorage.getItem('errorOCR'))
+                                        localStorage.removeItem('errorOCR');
+                                      localStorage.setItem('errorOCR', this.error);
+                                      if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                                      localStorage.setItem("url", "ops");
+                                      this.router.navigateByUrl('decision');
+                                    });
+                                }, error => {
+                                  console.log(error);
+                                }
+                              );
+                            }
+                          }
+                        });
+                    },
+                    error => {
+                      console.log(error);
                     }
-                    else {
-                      if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-                      localStorage.setItem("url", "ok");
-                      this.router.navigateByUrl('decision');
-                    }
-                  });
-                  // }
-                  // , l => { }
-                  // )
-                  //alert(this.credit.capital);
-
-                }, err => {
-
-                });
-
-                // }
-                // else if (this.ok1 == false ||
-                //   this.ok2 == false ||
-                //   this.ok3 == false ||
-                //   this.ok4 == false ||
-                //   this.ok5 == false) {
-              } else {
-                this.creditservice.getCreditByUser(this.userModel.email).subscribe(data => {
-
-                  this.credit = data;
-                  // this.camundaservice.completeTaskScanDocs(60, this.credit.taskId, this.credit.id).subscribe(
-                  //   ad => {
-                  if (localStorage.getItem('errorOCR'))
-                    localStorage.removeItem('errorOCR');
-                  localStorage.setItem('errorOCR', this.error);
-                  if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-                  localStorage.setItem("url", "ops");
-                  this.router.navigateByUrl('decision');
-                  // this.photo2Service.photos2=null;
-                  // this.photoService.photos=null;
-                  // this.buttonhasCli=false;
-                  // this.buttonhasCli2=false;
-                  // this.beenClicked=false;
-                  // button.disabled=false;
-                  // button2.disabled=false;
-                  // this.ok=true;
-                  //this.photo2Service.photos2=
-                  //this.router.navigate(['/decision/ops']);
-                  // },
-                  // le => { }
-                  // )
-                })
-                //alert("ttt");
-
-              }
-
+                  );
+                }, error => {
+                  spinner.style.display = "none";
+                  document.getElementById("sendButton").removeAttribute("disabled");
+                  obtenirOtpLabel.style.display = "block";
+                }
+              )
             },
-            (error) => {
+            error => {
               spinner.style.display = "none";
               document.getElementById("sendButton").removeAttribute("disabled");
               obtenirOtpLabel.style.display = "block";
             }
           );
-
-        }, e => {
-
+        }, error => {
+          console.log(error);
         });
       }
+    } else {
+      alert("Veuillez choisir une photo");
     }
-  }
-
-  sendEmail() {
-
-  }
-
-
-  sendEmail2() {
-    this.creditservice.getCreditByUser(this.userModel.email).subscribe(data => {
-
-      this.credit = data;
-      //alert(this.credit.capital);
-      this.email.email = this.userModel.email;
-      this.email.subject = "Mon Credit";
-      if (this.userModel.sexe == 'femme') {
-        this.email.message = "Bonjour Madame " + this.userModel.lastName.toUpperCase() + " " + this.userModel.firstName.toUpperCase() + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): " + this.credit.capital + " DH\n\tDurée (mois): " + this.credit.duree + " mois.\n\tMensualité (DH/mois): " + this.credit.mensualite + " DH/mois.\n\n Cordialement.";
-      }
-      else {  //Monsieur
-        this.email.message = "Bonjour Monsieur " + this.userModel.lastName.toUpperCase() + " " + this.userModel.firstName.toUpperCase() + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): " + this.credit.capital + " DH\n\tDurée (mois): " + this.credit.duree + " mois.\n\tMensualité (DH/mois): " + this.credit.mensualite + " DH/mois.\n\n Cordialement.";
-      }
-      this.authService.sendEmail(this.email).subscribe(res => {
-        // this.router.navigate(['/decision/ok']);
-
-      }, error => {
-        //if(error.status==200) this.router.navigate(['/decision/ok']);
-        //else{this.router.navigate(['/decision/ok']);}
-      });
-    }, err => {
-
-    });
   }
 }

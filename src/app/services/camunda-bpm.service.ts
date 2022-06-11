@@ -17,34 +17,42 @@ export class CamundaBPMService {
 
   startProcess(user: User): Observable<any> {
     return this.http.post(API_URL + "start-process", JSON.stringify(user),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", "Authorization": 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
   getTaskId(id: string, processInstanceId: string): Observable<any> {
     //alert(user.firstName);
     return this.http.get(API_URL + "info-task-instance/" + id + "/" + processInstanceId,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", "Authorization": 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, responseType: 'text' as 'json' });
   }
 
   completeTaskOTP(user: User, taskId: string): Observable<any> {
     return this.http.post(API_URL + "complete-task-otp-motPass?taskId=" + taskId, JSON.stringify(user),
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", "Authorization": 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, responseType: 'text' as 'json' });
   }
 
-  completeTaskScanDocs(fiabilite: number, taskId: string, id: number): Observable<any> {
-    return this.http.post(API_URL + "complete-task-scan-docs?taskId=" + taskId + "&fiabilite=" + fiabilite, id,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
+  completeTaskScanDocs(taskId: string, fiabilite: number): Observable<any> {
+    console.log(taskId);
+    console.log(fiabilite);
+
+    const headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24')
+    };
+    const body = {};
+    return this.http.post<any>(API_URL + "complete-task-scan-docs?fiabilite=" + fiabilite + "&taskId="
+      + taskId, body, { headers, responseType: 'text' as 'json' });
   }
 
   //complete_Task_Ver_Man_Docs?taskId=ced41be2-dc59-11ec-b82f-00216afe58e9&verifierMan=false
   completeTaskVerManDocs(verifierMan: string, taskId: string, id: number): Observable<any> {
     return this.http.post(API_URL + "complete_Task_Ver_Man_Docs?taskId=" + taskId + "&verifierMan=" + verifierMan, id,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", "Authorization": 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, responseType: 'text' as 'json' });
   }
 
   completeTaskEntretienClient(taskId: string, id: number): Observable<any> {
     return this.http.post(API_URL + "complete_Task_Entretien_Client?taskId=" + taskId, id,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
+      { headers: { "Content-Type": "application/json; charset=UTF-8", "Authorization": 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, responseType: 'text' as 'json' });
   }
 
 } 

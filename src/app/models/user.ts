@@ -18,5 +18,6 @@ export class User {
     public client: string;
     public fonctionnaire: string;
     public mensuel: string;
+    public otp: string;
     constructor() { }
 }

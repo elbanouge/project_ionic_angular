@@ -41,9 +41,6 @@ export class ForgotPasswordPage implements OnInit {
     this.userEmail.message = "Bonjour,\n Votre OTP est:";
     this.userEmail.subject = "Verification de l'OTP";
 
-
-
-
     this.ionicForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
@@ -86,9 +83,9 @@ export class ForgotPasswordPage implements OnInit {
 
     //alert(this.userEmail);
     this.authService.sendOTP(this.userEmail).subscribe(data => {
+      this.urlChange = 'verifyotp';
       if (data.status == 200) {
         this.urlChange = 'verifyotp';
-
       }
     },
       err => {
@@ -186,9 +183,11 @@ export class ForgotPasswordPage implements OnInit {
     obtenirverifyLabel.style.display = "none";
     spinner.style.display = "block";
     var otp = this.first.value + this.second.value + this.third.value + this.fourth.value + this.fifth.value + this.sixth.value;
-    var result = this.authService.verifyOTP(parseInt(otp)).subscribe(response => {
+    var result = this.authService.verifyOTP(parseInt(otp), this.user.email).subscribe(response => {
       if (response.status == 200) {
-        this.urlChange = 'password';
+        // this.urlChange = 'password';
+        localStorage.setItem('changePasswordEmail', this.user.email);
+        this.router.navigate(['/change-password']);
       }
       if (response.status == 400) {
         spinner.style.display = "none";
@@ -199,7 +198,9 @@ export class ForgotPasswordPage implements OnInit {
       }
     }, err => {
       if (err.status == 200) {
-        this.urlChange = 'password';
+        // this.urlChange = 'password';
+        localStorage.setItem('changePasswordEmail', this.user.email);
+        this.router.navigate(['/change-password']);
       }
       if (err.status == 400) {
         this.chip2.style.display = "block";

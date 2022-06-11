@@ -104,9 +104,10 @@ export class VerifyOTPPage implements OnInit {
     this.fifth = document.getElementById("fifth");
     this.sixth = document.getElementById("sixth");
     var otp = this.first.value + this.second.value + this.third.value + this.fourth.value + this.fifth.value + this.sixth.value;
-    this.authService.verifyOTP(parseInt(otp)).subscribe(response => {
+    this.authService.verifyOTP(parseInt(otp), this.loadService.loadUser().email).subscribe(response => {
       //console.log(response);
       if (response.status == 200) {
+        localStorage.setItem("currentOTP", otp);
         this.router.navigateByUrl("/setpassword");
         //alert("ok");
       }
@@ -118,6 +119,7 @@ export class VerifyOTPPage implements OnInit {
     }, err => {
       //console.log(err);
       if (err.status == 200) {
+        localStorage.setItem("currentOTP", otp);
         this.router.navigateByUrl("/setpassword");
         //alert("ok2");
       }

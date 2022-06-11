@@ -51,7 +51,7 @@ export class CreditService {
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
-  getByemail(email: string): Observable<any> {
+  getCreditsByUser(email: string): Observable<any> {
     return this.http.get(API_URL + "getCreditsByUser/" + email,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }

@@ -8,7 +8,6 @@ import { Email } from '../models/email';
 import { User } from '../models/user';
 import { LoadService } from './load.service';
 
-
 let API_EMAIL_URL = environment.apiBaseUrl + "/api/email/";
 let API_URL = environment.apiBaseUrl + "/api/user/";
 
@@ -58,7 +57,7 @@ export class AuthService {
     user.lieu_naissance = user.address.trim();
     user.username = user.email.split("@")[0].trim();
     user.password = user.lastName.toLocaleLowerCase().trim();
-    localStorage.setItem('currentPassword', JSON.stringify(user.password));
+    localStorage.setItem('currentPassword', JSON.stringify(this.loadService.encrypted(user.password)));
 
     return this.http.post(API_URL + 'registration', JSON.stringify(user),
       { headers: { "Content-Type": "application/json; charset=UTF-8" } });
@@ -69,19 +68,15 @@ export class AuthService {
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
-  verifyOTP(otp: number): Observable<any> {
-    return this.http.get(API_EMAIL_URL + 'verifyOTP/' + this.loadService.loadUser().email + '/' + otp,
+  verifyOTP(otp: number, email: string): Observable<any> {
+    return this.http.get(API_EMAIL_URL + 'verifyOTP/' + email + '/' + otp,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
 
   createPassword(email: string, password: string): Observable<any> {
     const json = '{ "email": "' + email + '", "password": "' + password + '"} ';
-
     console.log(json);
-
     const obj = JSON.parse(json);
-
-
 
     return this.http.put(API_URL + 'createPassword', obj,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
@@ -96,7 +91,7 @@ export class AuthService {
     return this.http.delete(API_URL + 'delete/' + email,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
-  //deletebyid
+
   deletebyid(id: number): Observable<any> {
     return this.http.delete(API_URL + 'deletebyid/' + id,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
@@ -106,8 +101,8 @@ export class AuthService {
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
-  updateUser(email: string, user: User) {
-    return this.http.put(API_URL + 'update/' + email, user,
+  updateUser(id: string, user: User) {
+    return this.http.put(API_URL + 'update/' + id, user,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') } });
   }
 
@@ -116,9 +111,7 @@ export class AuthService {
   }
 
   logout() {
-    //console.log(localStorage.getItem("user"));
-    localStorage.clear();
-    //console.log(localStorage.getItem("user"));
+    // localStorage.clear();
     this.router.navigateByUrl('/login', { replaceUrl: true });
   }
 

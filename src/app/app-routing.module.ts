@@ -167,7 +167,11 @@ const routes: Routes = [
   {
     path: 'decision/okcontact',
     loadChildren: () => import('./pages/decision/decision.module').then(m => m.DecisionPageModule)
+  },  {
+    path: 'change-password',
+    loadChildren: () => import('./pages/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
   },
+
 
   //okUppass   opsUppass
   // {

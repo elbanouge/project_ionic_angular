@@ -8,7 +8,7 @@ export class Credit {
     public mensualite: string;
     public minMensualite: string;
     public maxMensualite: string;
-    public creditdate: string;
+    public date: string;
     public user: User;
     public processInstanceId: string;
     public taskId: string;

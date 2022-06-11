@@ -20,7 +20,7 @@ export class ProfilePage implements OnInit {
     public modalController: ModalController,
     public toastController: ToastController) { }
 
-  private user: User = new User();
+  public user: User = new User();
   personInfo: NgForm;
   financialInfo: NgForm;
   count: number;
@@ -29,6 +29,7 @@ export class ProfilePage implements OnInit {
   submittedPersonForm = false;
   submittedMoneyForm = false;
   connection: boolean = true;
+  // connection: boolean = false;
   list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
   ngOnInit() {
@@ -91,8 +92,8 @@ export class ProfilePage implements OnInit {
       document.getElementById("date_nai_choose").style.display = "block";
     }
     else {
-      this.authServices.updateUser(this.authServices.getUser().email, this.user).subscribe(data => {
-        localStorage.setItem("user", JSON.stringify(data));
+      this.authServices.updateUser(this.authServices.getUser().id, this.user).subscribe(data => {
+        localStorage.setItem("currentUser", JSON.stringify(this.user));
         edit.el.style.display = "block";
         save.el.style.display = "none";
         document.getElementById("cin").setAttribute("style", "color:#855fa0;");

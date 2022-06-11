@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { CamundaBPMService } from 'src/app/services/camunda-bpm.service';
 import { CreditService } from 'src/app/services/credit.service';
+import { LoadService } from 'src/app/services/load.service';
 
 @Component({
   selector: 'app-setpassword',
@@ -25,6 +26,7 @@ export class SetpasswordPage implements OnInit {
   constructor(public formBuilder: FormBuilder,
     private camundaServices: CamundaBPMService,
     private creditservice: CreditService,
+    private loadService: LoadService,
     private router: Router, private authServices: AuthService) { }
 
   ngOnInit() {
@@ -80,47 +82,63 @@ export class SetpasswordPage implements OnInit {
         spinner.style.display = "block";
         this.authServices.createPassword((this.authServices.getUser().email), this.userModel.password).subscribe(
           data => {
-            localStorage.setItem('currentPassword', this.userModel.password);
+            localStorage.setItem('currentPassword', this.loadService.encrypted(this.userModel.password));
             this.creditservice.getCreditByUser(this.authServices.getUser().email).subscribe(
-              d => {
-                this.credit = d;
-                //taskId:string,id:number
+              data => {
+                this.credit = data;
                 this.camundaServices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
                   data => {
-                    console.log(data);
-                    this.router.navigate(['/ocrhome']);
+                    this.credit.taskId = data.split(" : ")[0];
+                    this.credit.taskName = data.split(" : ")[1];
+                    localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                    this.credit.user.password = this.loadService.loadPasswordUser();
+                    this.credit.user.otp = this.loadService.loadOtpUser();
 
-                    // this.camundaServices.completeTaskOTP(this.credit.user, this.credit.taskId).subscribe(
-                    //   data => {
-                    //     console.log(data);
-                    //     this.router.navigate(['/ocrhome']);
-                    //   },
-                    //   error => {
-                    //     console.error(error);
-                    //     spinner.style.display = "none";
-                    //     document.getElementById("sendButton").removeAttribute("disabled");
-                    //     obtenirOtpLabel.style.display = "block";
-                    //   }
-                    // );
+                    console.log(this.credit)
+                    this.camundaServices.completeTaskOTP(this.credit.user, this.credit.taskId).subscribe(
+                      data => {
+                        console.log(data);
+                        this.camundaServices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                          data => {
+                            this.credit.taskId = data.split(" : ")[0];
+                            this.credit.taskName = data.split(" : ")[1];
+                            localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                            this.router.navigate(['/ocrhome']);
+                          }
+                        );
+                      },
+                      error => {
+                        if (error.status == 200) {
+                          this.camundaServices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                            data => {
+                              this.credit.taskId = data.split(" : ")[0];
+                              this.credit.taskName = data.split(" : ")[1];
+                              localStorage.setItem('currentCredit', JSON.stringify(this.credit));
+                              this.router.navigate(['/ocrhome']);
+                            }
+                          );
+                        } else {
+                          console.error(error);
+                          spinner.style.display = "none";
+                          document.getElementById("sendButton").removeAttribute("disabled");
+                          obtenirOtpLabel.style.display = "block";
+                        }
+                      }
+                    );
                   },
                   error => {
                     console.error(error);
                   }
                 );
+
               },
-              e => { }
-            )
-
-
-
-
-          }, err => {
-
-            //alert(err);
+              error => {
+                console.error(error);
+              })
+          }, error => {
+            console.error(error);
           })
-
       }
-      // else alert("error");
     }
   }
 }

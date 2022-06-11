@@ -124,9 +124,10 @@
 
                   <ion-col>
                     <ion-input *ngIf="connection" type="text" name="date_nai" id="date_nai_text"
-                      [(ngModel)]="user.dateNai" disabled style="color:#855fa0;"></ion-input>
+                      [(ngModel)]="user.date_naissance" disabled style="color:#855fa0;"></ion-input>
                     <ion-input *ngIf="connection" type="text" name="date_nai" (click)="presentPicker()"
-                      id="date_nai_choose" [(ngModel)]="user.dateNai" style="color:black;display: none;"></ion-input>
+                      id="date_nai_choose" [(ngModel)]="user.date_naissance" style="color:black;display: none;">
+                    </ion-input>
                     <ion-label *ngIf="!connection">
                       <ion-skeleton-text animated></ion-skeleton-text>
                     </ion-label>
@@ -177,9 +178,9 @@
                   </ion-col>
                   <ion-col>
                     <ion-button *ngIf="connection" shape="round" id="first" class="fonctionnaire"
-                      (click)="user.fonctionnaire=true;choose($event)" disabled>Oui</ion-button>
+                      (click)="user.fonctionnaire='true';choose($event)" disabled>Oui</ion-button>
                     <ion-button *ngIf="connection" shape="round" id="second" class="fonctionnaire"
-                      (click)="user.fonctionnaire=false;choose($event)" disabled>Non</ion-button>
+                      (click)="user.fonctionnaire='false';choose($event)" disabled>Non</ion-button>
                     <input *ngIf="connection" type="text" [(ngModel)]="user.fonctionnaire" name="fonctionnaire"
                       style="display:none;" #fct>
                     <ion-label *ngIf="!connection">
@@ -194,9 +195,9 @@
                   </ion-col>
                   <ion-col>
                     <ion-button *ngIf="connection" shape="round" id="first" class="client"
-                      (click)="user.client=true;choose($event)" disabled>Oui</ion-button>
+                      (click)="user.client='true';choose($event)" disabled>Oui</ion-button>
                     <ion-button *ngIf="connection" shape="round" id="second" class="client"
-                      (click)="user.client=false;choose($event)" disabled>Non</ion-button>
+                      (click)="user.client='false';choose($event)" disabled>Non</ion-button>
                     <input *ngIf="connection" type="text" name="client" [(ngModel)]="user.client" style="display:none;"
                       #clt>
                     <ion-label *ngIf="!connection">

@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
       else {
         this.authService.login(this.userModel).subscribe(data => {
           this.userlogin.reset();
-          localStorage.setItem('user', JSON.stringify(data));
+          localStorage.setItem('currentUser', JSON.stringify(data));
           this.router.navigateByUrl('home/profile');
         }, err => {
           if (err == "email") {
