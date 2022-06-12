@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { data } from 'jquery';
 import { Credit } from 'src/app/models/credit';
 import { Email } from 'src/app/models/email';
 import { User } from 'src/app/models/user';
@@ -72,68 +73,72 @@ export class DecisionPage implements OnInit {
   }
 
   onClick() {
-    //alert(this.auth.userEmail.email);
     this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(data => {
-
       this.c = data;
-
-      //this.c.user.scanners=this.c.user.scanners;
-      //alert(this.c.user.scanners.id);
-      //alert(data);
 
       localStorage.setItem("url", "annuler");
       this.router.navigateByUrl('decision');
       this.message = localStorage.getItem("url");
 
-      // this.creditservice.delete(this.c.id).subscribe(
-      //   ass => {
-      //     this.id = Number(this.c.user.id);
-      //     this.auth.deletebyid(this.id).subscribe(data => {
+      this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(data => {
+        this.credit = data;
+        this.camundaservices.completeTaskVerManDocs("true", this.credit.taskId).subscribe(
+          data => {
+            this.creditservice.delete(this.c.id).subscribe(
+              data => {
+                // this.id = Number(this.c.user.id);
+                // this.auth.deletebyid(this.id).subscribe(data => {
 
-      //       if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-      //       localStorage.setItem("url", "annuler");
-      //       this.router.navigateByUrl('decision');
-      //       this.message = localStorage.getItem("url");
-      //       //this.router.navigateByUrl('decision/annuler');
+                // if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                localStorage.setItem("url", "annuler");
+                this.router.navigateByUrl('decision');
+                this.message = localStorage.getItem("url");
 
-      //     }, err => {
-      //       if (localStorage.getItem("url") != null) localStorage.removeItem("url");
-      //       localStorage.setItem("url", "annuler");
-      //       this.router.navigateByUrl('decision');
-      //       this.message = localStorage.getItem("url");
-      //     });
-      //   },
-      //   lay => { }
-      // )
-    }, err => {
+                // this.router.navigateByUrl('/welcome');
 
-    }
-    );
+                // }, error => {
+                //   if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+                //   localStorage.setItem("url", "annuler");
+                //   this.router.navigateByUrl('decision');
+                //   this.message = localStorage.getItem("url");
+                // });
+              },
+              error => { });
+          },
+          error => { });
+      },
+        error => { });
+    }, error => { });
   }
 
 
   ok() {
-
-    this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(layla => {
-
-      this.c = layla;
-      // this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
-      //   lay => {
-      //     this.c = lay;
-      //     this.camundaservices.completeTaskScanDocs(90, this.c.taskId, this.c.id).subscribe(
-      //       a => {
-      //         this.sendEmail();
-      //       },
-      //       l => { }
-      //     )
-      //   },
-      //   ass => { }
-      // )
-      //
-
+    this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(data => {
+      this.credit = data;
+      this.camundaservices.completeTaskVerManDocs("false", this.credit.taskId).subscribe(
+        data => {
+          this.camundaservices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+            data => {
+              this.credit.taskId = data.split(" : ")[0];
+              this.credit.taskName = data.split(" : ")[1];
+              localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+              this.camundaservices.completeTaskScanDocs(this.credit.taskId, 90).subscribe(
+                data => {
+                  this.camundaservices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+                    data => {
+                      this.credit.taskId = data.split(" : ")[0];
+                      this.credit.taskName = data.split(" : ")[1];
+                      localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+                      // this.router.navigateByUrl('ocrop');
+                      this.sendEmail();
+                    });
+                },
+                error => { });
+            });
+        },
+        error => { });
     },
-      assia => { })
-
+      error => { });
   }
 
   modifier() {
@@ -163,19 +168,24 @@ export class DecisionPage implements OnInit {
 
   scanner() {
 
-    this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(layla => {
+    this.creditservice.getCreditByUser(this.auth.getUser().email).subscribe(data => {
+      this.credit = data;
+      this.camundaservices.completeTaskVerManDocs("false", this.credit.taskId).subscribe(
+        data => {
+          this.camundaservices.getTaskId(this.credit.user.id, this.credit.processInstanceId).subscribe(
+            data => {
+              this.credit.taskId = data.split(" : ")[0];
+              this.credit.taskName = data.split(" : ")[1];
+              localStorage.setItem("currentCredit", JSON.stringify(this.credit));
+              this.router.navigateByUrl('ocrop');
+            }
+          );
 
-      this.c = layla;
-      this.router.navigateByUrl('ocrhome');
-
-      // this.camundaservices.completeTaskVerManDocs("false", this.c.taskId, this.c.id).subscribe(
-      //   lay => {
-      //     this.router.navigateByUrl('ocrhome');
-      //   },
-      //   ass => { }
-      // )
+        },
+        error => { }
+      )
     },
-      assia => { })
+      error => { })
   }
 
   sendEmail() {
@@ -194,10 +204,15 @@ export class DecisionPage implements OnInit {
           this.email.message = "Bonjour Monsieur " + this.userModel.lastName.toUpperCase() + " " + this.userModel.firstName.toUpperCase() + " ;\n\n Votre simulation de credit est: \n\tMontant (DH): " + this.credit.capital + " DH\n\tDurée (mois): " + this.credit.duree + " mois.\n\tMensualité (DH/mois): " + this.credit.mensualite + " DH/mois.\n\n Cordialement.";
         }
         this.authService.sendEmail(this.email).subscribe(res => {
+
           if (localStorage.getItem("url") != null) localStorage.removeItem("url");
           localStorage.setItem("url", "ok");
           this.router.navigateByUrl('decision');
-          this.message = localStorage.getItem("url");
+
+          // if (localStorage.getItem("url") != null) localStorage.removeItem("url");
+          // localStorage.setItem("url", "ok");
+          // this.router.navigateByUrl('decision');
+          // this.message = localStorage.getItem("url");
           //this.router.navigate(['/decision/ok']);
 
         }, error => {

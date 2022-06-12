@@ -93,7 +93,7 @@ export class AuthService {
   }
 
   deletebyid(id: number): Observable<any> {
-    return this.http.delete(API_URL + 'deletebyid/' + id,
+    return this.http.delete(API_URL + 'delete/' + id,
       { headers: { "Content-Type": "application/json; charset=UTF-8", Authorization: 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, observe: 'response' as 'response' })
   }
   getUserData() {

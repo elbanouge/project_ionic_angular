@@ -42,12 +42,19 @@ export class OcropPage implements OnInit {
     public navCtrl: NavController,
     public photoService: PhotoService,
     public photo2Service: Photo2Service,
-    public actionSheetController: ActionSheetController) { }
+    public actionSheetController: ActionSheetController) {
+  }
 
   buttonhasCli: boolean = false;
   buttonhasCli2: boolean;
   beenClicked: boolean = false;
   ok: boolean = false;
+
+
+  refresh() {
+    location.reload();
+  }
+
   addPhotoToGallery(button: any): any {
     this.photoService.addNewToGallery();
     button.disabled = true;
@@ -275,10 +282,30 @@ export class OcropPage implements OnInit {
                                         localStorage.setItem('errorOCR', this.error);
                                         if (localStorage.getItem("url") != null) localStorage.removeItem("url");
                                         localStorage.setItem("url", "ops");
+
+                                        // let position = 0;
+                                        // this.photoService.photos.forEach(photo => {
+                                        //   this.photoService.deletePicture(photo, position);
+                                        //   position++;
+                                        // });
+
+                                        // let position2 = 0;
+                                        // this.photo2Service.photos2.forEach(photo => {
+                                        //   this.photo2Service.deletePicture2(photo, position2);
+                                        //   position++;
+                                        // });
+
+
                                         this.router.navigateByUrl('decision');
+                                        spinner.style.display = "none";
+                                        document.getElementById("sendButton").removeAttribute("disabled");
+                                        obtenirOtpLabel.style.display = "block";
                                       });
                                   }, error => {
                                     console.log(error);
+                                    spinner.style.display = "none";
+                                    document.getElementById("sendButton").removeAttribute("disabled");
+                                    obtenirOtpLabel.style.display = "block";
                                   }
                                 );
                               }
@@ -296,9 +323,29 @@ export class OcropPage implements OnInit {
                                       if (localStorage.getItem("url") != null) localStorage.removeItem("url");
                                       localStorage.setItem("url", "ops");
                                       this.router.navigateByUrl('decision');
+
+                                      // let position = 0;
+                                      // this.photoService.photos.forEach(photo => {
+                                      //   this.photoService.deletePicture(photo, position);
+                                      //   position++;
+                                      // });
+
+                                      // let position2 = 0;
+                                      // this.photo2Service.photos2.forEach(photo => {
+                                      //   this.photo2Service.deletePicture2(photo, position2);
+                                      //   position++;
+                                      // });
+
+                                      this.router.navigateByUrl('decision');
+                                      spinner.style.display = "none";
+                                      document.getElementById("sendButton").removeAttribute("disabled");
+                                      obtenirOtpLabel.style.display = "block";
                                     });
                                 }, error => {
                                   console.log(error);
+                                  spinner.style.display = "none";
+                                  document.getElementById("sendButton").removeAttribute("disabled");
+                                  obtenirOtpLabel.style.display = "block";
                                 }
                               );
                             }
@@ -307,9 +354,13 @@ export class OcropPage implements OnInit {
                     },
                     error => {
                       console.log(error);
+                      spinner.style.display = "none";
+                      document.getElementById("sendButton").removeAttribute("disabled");
+                      obtenirOtpLabel.style.display = "block";
                     }
                   );
                 }, error => {
+                  console.log(error);
                   spinner.style.display = "none";
                   document.getElementById("sendButton").removeAttribute("disabled");
                   obtenirOtpLabel.style.display = "block";
@@ -317,6 +368,7 @@ export class OcropPage implements OnInit {
               )
             },
             error => {
+              console.log(error);
               spinner.style.display = "none";
               document.getElementById("sendButton").removeAttribute("disabled");
               obtenirOtpLabel.style.display = "block";
@@ -324,6 +376,9 @@ export class OcropPage implements OnInit {
           );
         }, error => {
           console.log(error);
+          spinner.style.display = "none";
+          document.getElementById("sendButton").removeAttribute("disabled");
+          obtenirOtpLabel.style.display = "block";
         });
       }
     } else {

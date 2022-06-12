@@ -45,9 +45,14 @@ export class CamundaBPMService {
   }
 
   //complete_Task_Ver_Man_Docs?taskId=ced41be2-dc59-11ec-b82f-00216afe58e9&verifierMan=false
-  completeTaskVerManDocs(verifierMan: string, taskId: string, id: number): Observable<any> {
-    return this.http.post(API_URL + "complete_Task_Ver_Man_Docs?taskId=" + taskId + "&verifierMan=" + verifierMan, id,
-      { headers: { "Content-Type": "application/json; charset=UTF-8", "Authorization": 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24') }, responseType: 'text' as 'json' });
+  completeTaskVerManDocs(verifierMan: string, taskId: string): Observable<any> {
+    const headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Basic ' + btoa('abde.banouge2' + ':' + 'abde24')
+    };
+    const body = {};
+    return this.http.post<any>(API_URL + "complete_Task_Ver_Man_Docs?taskId=" + taskId + "&verifierMan="
+      + verifierMan, body, { headers, responseType: 'text' as 'json' });
   }
 
   completeTaskEntretienClient(taskId: string, id: number): Observable<any> {
