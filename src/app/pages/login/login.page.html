@@ -29,7 +29,7 @@
           <ion-col>
             <ion-item style="--background:white;">
               <ion-input [(ngModel)]="userModel.email"
-                pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                pattern="[A-Za-z0-9._%+-]{3,}@[A-Za-z0-9]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
                 placeholder="Email" type="email" name="email" required id="email" #email="ngModel"
                 [class.is-invalid]="email.invalid && email.touched" required (ionChange)="ionChange()"></ion-input>
             </ion-item>

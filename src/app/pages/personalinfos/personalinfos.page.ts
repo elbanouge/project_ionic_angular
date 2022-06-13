@@ -59,7 +59,7 @@ export class PersonalinfosPage implements OnInit {
       address: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
       phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern('^[0-9]+$')]],
-      cinval: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(8), Validators.pattern('[A-Z]{1,2}[0-9]{5,6}')]],
+      cinval: ['', [Validators.required, Validators.maxLength(8), Validators.minLength(7), Validators.pattern('[A-Z]{1,2}[0-9]{5,6}')]],
       date: ['', [Validators.required]],
       nationalite: ['', [Validators.required]]
     });

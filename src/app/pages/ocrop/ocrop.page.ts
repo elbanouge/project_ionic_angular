@@ -157,13 +157,13 @@ export class OcropPage implements OnInit {
   ok5: boolean = false;
   async valider() {
 
-    if (this.buttonhasCli == true && this.buttonhasCli2 == true) {
+    let spinner = document.getElementById('spinner');
+    document.getElementById("sendButton").setAttribute("disabled", "true");
+    let obtenirOtpLabel = document.getElementById('obtenirOtpLabel');
+    obtenirOtpLabel.style.display = "none";
+    spinner.style.display = "block";
 
-      let spinner = document.getElementById('spinner');
-      document.getElementById("sendButton").setAttribute("disabled", "true");
-      let obtenirOtpLabel = document.getElementById('obtenirOtpLabel');
-      obtenirOtpLabel.style.display = "none";
-      spinner.style.display = "block";
+    if (this.buttonhasCli == true && this.buttonhasCli2 == true) {
 
       /** CNIE recto **/
       var url1 = document.getElementById('url1');
@@ -277,9 +277,9 @@ export class OcropPage implements OnInit {
                                         this.credit.taskId = data.split(" : ")[0];
                                         this.credit.taskName = data.split(" : ")[1];
                                         localStorage.setItem('currentCredit', JSON.stringify(this.credit));
-                                        if (localStorage.getItem('errorOCR'))
-                                          localStorage.removeItem('errorOCR');
-                                        localStorage.setItem('errorOCR', this.error);
+                                        // if (localStorage.getItem('errorOCR'))
+                                        // localStorage.removeItem('errorOCR');
+                                        // localStorage.setItem('errorOCR', this.error);
                                         if (localStorage.getItem("url") != null) localStorage.removeItem("url");
                                         localStorage.setItem("url", "ops");
 
@@ -317,9 +317,9 @@ export class OcropPage implements OnInit {
                                       this.credit.taskId = data.split(" : ")[0];
                                       this.credit.taskName = data.split(" : ")[1];
                                       localStorage.setItem('currentCredit', JSON.stringify(this.credit));
-                                      if (localStorage.getItem('errorOCR'))
-                                        localStorage.removeItem('errorOCR');
-                                      localStorage.setItem('errorOCR', this.error);
+                                      // if (localStorage.getItem('errorOCR'))
+                                      // localStorage.removeItem('errorOCR');
+                                      // localStorage.setItem('errorOCR', this.error);
                                       if (localStorage.getItem("url") != null) localStorage.removeItem("url");
                                       localStorage.setItem("url", "ops");
                                       this.router.navigateByUrl('decision');
